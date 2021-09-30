@@ -9,20 +9,22 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from PyQt5 import QtQuickWidgets
+import sys
+import CharacterSheet
 
 class Ui_PlayingField(object):
     def setupUi(self, PlayingField):
         PlayingField.setObjectName("PlayingField")
         PlayingField.resize(1267, 613)
         self.textEdit_log = QtWidgets.QTextEdit(PlayingField)
-        self.textEdit_log.setGeometry(QtCore.QRect(1010, 540, 181, 51))
+        self.textEdit_log.setGeometry(QtCore.QRect(1028, 540, 181, 51))
         self.textEdit_log.setObjectName("textEdit_log")
         self.pushButton_log = QtWidgets.QPushButton(PlayingField)
-        self.pushButton_log.setGeometry(QtCore.QRect(1200, 540, 51, 51))
+        self.pushButton_log.setGeometry(QtCore.QRect(1028, 540, 51, 51))
         self.pushButton_log.setObjectName("pushButton_log")
         self.textBrowser_log = QtWidgets.QTextBrowser(PlayingField)
-        self.textBrowser_log.setGeometry(QtCore.QRect(1010, 20, 241, 511))
+        self.textBrowser_log.setGeometry(QtCore.QRect(1028, 20, 241, 511))
         self.textBrowser_log.setObjectName("textBrowser_log")
         self.comboBox_characteristic = QtWidgets.QComboBox(PlayingField)
         self.comboBox_characteristic.setGeometry(QtCore.QRect(130, 20, 121, 21))
@@ -61,12 +63,14 @@ class Ui_PlayingField(object):
         self.pushButton_throw.setGeometry(QtCore.QRect(10, 170, 241, 28))
         self.pushButton_throw.setObjectName("pushButton_throw")
         self.line_2 = QtWidgets.QFrame(PlayingField)
-        self.line_2.setGeometry(QtCore.QRect(990, 0, 20, 611))
+        self.line_2.setGeometry(QtCore.QRect(1028, 0, 20, 611))
         self.line_2.setFrameShape(QtWidgets.QFrame.VLine)
         self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_2.setObjectName("line_2")
         self.quickWidget_char = QtQuickWidgets.QQuickWidget(PlayingField)
-        self.quickWidget_char.setGeometry(QtCore.QRect(279, 19, 671, 551))
+        self.central_ui = CharacterSheet.Ui_Form()
+        self.central_ui.setupUi(self.quickWidget_char)
+        self.quickWidget_char.setGeometry(QtCore.QRect(260, 0, 768, 1024))
         self.quickWidget_char.setResizeMode(QtQuickWidgets.QQuickWidget.SizeRootObjectToView)
         self.quickWidget_char.setObjectName("quickWidget_char")
         self.line_3 = QtWidgets.QFrame(PlayingField)
@@ -79,8 +83,8 @@ class Ui_PlayingField(object):
         self.pushButton_log.clicked.connect(self.textEdit_log.selectAll)
         QtCore.QMetaObject.connectSlotsByName(PlayingField)
 
-        sendThrow = pyqtSignal(string, int, string, int, string)
-        pushButton_log.clicked.connect(sendMsg)
+        sendThrow = QtCore.pyqtSignal()
+        self.pushButton_log.clicked.connect(self.sendMsg)
 
     def retranslateUi(self, PlayingField):
         _translate = QtCore.QCoreApplication.translate
@@ -93,16 +97,16 @@ class Ui_PlayingField(object):
         self.label_throwType.setText(_translate("PlayingField", "Тип броска"))
         self.pushButton_throw.setText(_translate("PlayingField", "Сделать бросок"))
 
-    def setCharacteristic(self, list)
+    def setCharacteristic(self, list):
         self.comboBox_characteristic.addItems(list)
 
-    def setEdgeNumber(self, list)
+    def setEdgeNumber(self, list):
         self.comboBox_edgeNumber.addItems(list)
 
-    def setThrowType(self,list)
+    def setThrowType(self,list):
         self.comboBox_throwType.addItems(list)
 
-    def getThrowData(self)
+    def getThrowData(self):
         characteristic = self.comboBox_characteristic.currentText()
         throwNumber = self.spinBox_throwNumber.value()
         edgeNumber = self.comboBox_edgeNumber.currentText()
@@ -110,11 +114,19 @@ class Ui_PlayingField(object):
         throwType = self.comboBox_throwType.currentText()
         self.sendThrow.emit(characteristic, throwNumber, edgeNumber, modifically, throwType)
 
-    def editLog(self, text)
+    def editLog(self, text):
         self.textBrowser_log.append(text)
 
-    def sendMsg(self)
+    def sendMsg(self):
         self.editLog(self.editLog.toPlainText())
 
+if __name__ == "__main__":
+    app = QtWidgets.QApplication(sys.argv)
 
-from PyQt5 import QtQuickWidgets
+    ui = Ui_PlayingField()
+    window = QtWidgets.QMainWindow()
+    window.resize(1280, 1100)
+    ui.setupUi(window)
+
+    window.show()
+    app.exec()
