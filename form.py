@@ -17,6 +17,15 @@ class Ui_PlayingField(object):
     def setupUi(self, PlayingField):
         PlayingField.setObjectName("PlayingField")
         PlayingField.resize(1333, 613)
+        self.createButton = QtWidgets.QPushButton(PlayingField)
+        self.createButton.setGeometry(10, 200, 241, 28)
+        self.createButton.setText("Создать персонажа")
+        self.openButton = QtWidgets.QPushButton(PlayingField)
+        self.openButton.setGeometry(10, 230, 115, 28)
+        self.openButton.setText("Загрузить")
+        self.saveButton = QtWidgets.QPushButton(PlayingField)
+        self.saveButton.setGeometry(136, 230, 115, 28)
+        self.saveButton.setText("Сохранить")
         self.textEdit_log = QtWidgets.QTextEdit(PlayingField)
         self.textEdit_log.setGeometry(QtCore.QRect(1080, 540, 181, 51))
         self.textEdit_log.setObjectName("textEdit_log")
@@ -79,9 +88,15 @@ class Ui_PlayingField(object):
         self.central_area.setWidget(self.quickWidget_char)
 
         self.retranslateUi(PlayingField)
-        self.pushButton_log.clicked.connect(self.textEdit_log.selectAll)
-        QtCore.QMetaObject.connectSlotsByName(PlayingField)
 
+        self.openButton.clicked.connect(self.openChar)
+
+        self.saveButton.clicked.connect(self.saveChar)
+
+        self.createButton.clicked.connect(self.createChar)
+
+        self.pushButton_log.clicked.connect(self.sendMsg)
+        QtCore.QMetaObject.connectSlotsByName(PlayingField)
 
 
     def retranslateUi(self, PlayingField):
@@ -117,5 +132,14 @@ class Ui_PlayingField(object):
         self.textBrowser_log.append(text)
 
     def sendMsg(self):
-        self.editLog(self.editLog.toPlainText())
+        self.editLog(self.textEdit_log.toPlainText())
+
+    def openChar(self):
+        pass
+    
+    def saveChar(self):
+        pass
+
+    def createChar(self):
+        pass
 
