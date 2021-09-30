@@ -93,16 +93,16 @@ class Ui_PlayingField(object):
         self.label_throwType.setText(_translate("PlayingField", "Тип броска"))
         self.pushButton_throw.setText(_translate("PlayingField", "Сделать бросок"))
 
-    def setCharacteristic(self, list)
+    def setCharacteristic(self, list):
         self.comboBox_characteristic.addItems(list)
 
-    def setEdgeNumber(self, list)
+    def setEdgeNumber(self, list):
         self.comboBox_edgeNumber.addItems(list)
 
-    def setThrowType(self,list)
+    def setThrowType(self,list):
         self.comboBox_throwType.addItems(list)
 
-    def getThrowData(self)
+    def getThrowData(self):
         characteristic = self.comboBox_characteristic.currentText()
         throwNumber = self.spinBox_throwNumber.value()
         edgeNumber = self.comboBox_edgeNumber.currentText()
@@ -110,10 +110,10 @@ class Ui_PlayingField(object):
         throwType = self.comboBox_throwType.currentText()
         self.sendThrow.emit(characteristic, throwNumber, edgeNumber, modifically, throwType)
 
-    def editLog(self, text)
+    def editLog(self, text):
         self.textBrowser_log.append(text)
 
-    def sendMsg(self)
+    def sendMsg(self):
         self.editLog(self.editLog.toPlainText())
 
 
