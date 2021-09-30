@@ -25,11 +25,3 @@ def throwMany(count, edges, type):
         throws.remove(max(throws))
 
         return sum(throws)
-
-
-
-if __name__ == "__main__":
-    print(throwMany(6, 6, ThrowTypes.summ))
-    print(throwMany(2, 6, ThrowTypes.advantage))
-    print(throwMany(2, 6, ThrowTypes.hindrance))
-    print(throwMany(6, 6, ThrowTypes.withoutExtreme))
