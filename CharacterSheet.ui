@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -223,7 +223,7 @@
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit">
+    <widget class="QLineEdit" name="CHA_VALUE">
      <property name="geometry">
       <rect>
        <x>68</x>
@@ -239,7 +239,7 @@
       <bool>false</bool>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_2">
+    <widget class="QLineEdit" name="CHA_MOD">
      <property name="geometry">
       <rect>
        <x>53</x>
@@ -274,7 +274,7 @@
       <number>0</number>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="EDIT_EQUIPMENT">
      <property name="geometry">
       <rect>
        <x>430</x>
@@ -995,7 +995,7 @@
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QLineEdit" name="CHA_MOD">
+    <widget class="QLineEdit" name="CHA_ST_MOD">
      <property name="geometry">
       <rect>
        <x>140</x>
@@ -1624,7 +1624,7 @@
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QTextEdit" name="textEdit">
+    <widget class="QTextEdit" name="ALLIES">
      <property name="geometry">
       <rect>
        <x>270</x>
@@ -1637,7 +1637,7 @@
       <enum>QFrame::NoFrame</enum>
      </property>
     </widget>
-    <widget class="QTextEdit" name="textEdit_2">
+    <widget class="QTextEdit" name="ADDITIONAL_TRAITS">
      <property name="geometry">
       <rect>
        <x>271</x>
@@ -1666,7 +1666,7 @@
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QTextEdit" name="textEdit_3">
+    <widget class="QTextEdit" name="BACKSTORY">
      <property name="geometry">
       <rect>
        <x>24</x>
@@ -1679,18 +1679,760 @@
       <enum>QFrame::NoFrame</enum>
      </property>
     </widget>
+    <widget class="QListView" name="TRESURE">
+     <property name="geometry">
+      <rect>
+       <x>273</x>
+       <y>797</y>
+       <width>461</width>
+       <height>171</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="EDIT_TREUSURE">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>973</y>
+       <width>91</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Редактировать</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="CHARACTER_APPEARANCE">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>170</y>
+       <width>211</width>
+       <height>251</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="EDIT_APPEARANCE">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>430</y>
+       <width>91</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Внешность</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="EDIT_SYMBOL">
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>420</y>
+       <width>91</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Герб</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="AGE">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>60</y>
+       <width>113</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="HEIGHT">
+     <property name="geometry">
+      <rect>
+       <x>450</x>
+       <y>60</y>
+       <width>113</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="WEIGHT">
+     <property name="geometry">
+      <rect>
+       <x>590</x>
+       <y>60</y>
+       <width>113</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="EYES">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>93</y>
+       <width>113</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SKIN">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>93</y>
+       <width>113</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="HAIR">
+     <property name="geometry">
+      <rect>
+       <x>590</x>
+       <y>93</y>
+       <width>113</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
     <zorder>label_2</zorder>
     <zorder>SYMBOL_NAME</zorder>
     <zorder>Symbol</zorder>
-    <zorder>textEdit</zorder>
-    <zorder>textEdit_2</zorder>
+    <zorder>ALLIES</zorder>
+    <zorder>ADDITIONAL_TRAITS</zorder>
     <zorder>CHARACTER_NAME_AND_TITLES_2</zorder>
-    <zorder>textEdit_3</zorder>
+    <zorder>BACKSTORY</zorder>
+    <zorder>TRESURE</zorder>
+    <zorder>EDIT_TREUSURE</zorder>
+    <zorder>CHARACTER_APPEARANCE</zorder>
+    <zorder>EDIT_APPEARANCE</zorder>
+    <zorder>EDIT_SYMBOL</zorder>
+    <zorder>AGE</zorder>
+    <zorder>HEIGHT</zorder>
+    <zorder>WEIGHT</zorder>
+    <zorder>EYES</zorder>
+    <zorder>SKIN</zorder>
+    <zorder>HAIR</zorder>
    </widget>
    <widget class="QWidget" name="tab_3">
     <attribute name="title">
      <string>Заклинания и умения</string>
     </attribute>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>771</width>
+       <height>1021</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>data/images/CharacterSheet3.JPG</pixmap>
+     </property>
+    </widget>
+    <widget class="QListView" name="CONTRIPS">
+     <property name="geometry">
+      <rect>
+       <x>25</x>
+       <y>220</y>
+       <width>225</width>
+       <height>123</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+    </widget>
+    <widget class="QListView" name="SPELLS_1">
+     <property name="geometry">
+      <rect>
+       <x>25</x>
+       <y>444</y>
+       <width>225</width>
+       <height>217</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+    </widget>
+    <widget class="QListView" name="SPELLS_2">
+     <property name="geometry">
+      <rect>
+       <x>25</x>
+       <y>750</y>
+       <width>225</width>
+       <height>221</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+    </widget>
+    <widget class="QListView" name="SPELLS_3">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>220</y>
+       <width>225</width>
+       <height>215</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+    </widget>
+    <widget class="QListView" name="SPELLS_4">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>520</y>
+       <width>225</width>
+       <height>215</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+    </widget>
+    <widget class="QListView" name="SPELLS_5">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>823</y>
+       <width>225</width>
+       <height>148</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+    </widget>
+    <widget class="QListView" name="SPELLS_6">
+     <property name="geometry">
+      <rect>
+       <x>512</x>
+       <y>220</y>
+       <width>231</width>
+       <height>141</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+    </widget>
+    <widget class="QListView" name="SPELLS_7">
+     <property name="geometry">
+      <rect>
+       <x>513</x>
+       <y>450</y>
+       <width>231</width>
+       <height>137</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+    </widget>
+    <widget class="QListView" name="SPELLS_8">
+     <property name="geometry">
+      <rect>
+       <x>513</x>
+       <y>675</y>
+       <width>231</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+    </widget>
+    <widget class="QListView" name="SPELLS_9">
+     <property name="geometry">
+      <rect>
+       <x>513</x>
+       <y>861</y>
+       <width>231</width>
+       <height>109</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ADD_CONTRIPS">
+     <property name="geometry">
+      <rect>
+       <x>103</x>
+       <y>345</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Заговоры</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ADD_SPELL_1">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>663</y>
+       <width>101</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Заклинания 1ур</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ADD_SPELL_2">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>973</y>
+       <width>101</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Заклинания 2ур</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ADD_SPELL_3">
+     <property name="geometry">
+      <rect>
+       <x>333</x>
+       <y>437</y>
+       <width>101</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Заклинания 3ур</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ADD_SPELL_4">
+     <property name="geometry">
+      <rect>
+       <x>333</x>
+       <y>737</y>
+       <width>111</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Заклинания 4ур</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ADD_SPELL_5">
+     <property name="geometry">
+      <rect>
+       <x>333</x>
+       <y>973</y>
+       <width>111</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Заклинания 5ур</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ADD_SPELL_6">
+     <property name="geometry">
+      <rect>
+       <x>578</x>
+       <y>363</y>
+       <width>101</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Заклинания 6ур</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ADD_SPELL_7">
+     <property name="geometry">
+      <rect>
+       <x>578</x>
+       <y>589</y>
+       <width>101</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Заклинания 7ур</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ADD_SPELL_8">
+     <property name="geometry">
+      <rect>
+       <x>578</x>
+       <y>778</y>
+       <width>111</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Заклинания 8ур</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ADD_SPELL_9">
+     <property name="geometry">
+      <rect>
+       <x>578</x>
+       <y>973</y>
+       <width>101</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Заклинания 9ур</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SPELLCASTING_CLASS">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>80</y>
+       <width>241</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SPELLCASTING_ABILITY">
+     <property name="geometry">
+      <rect>
+       <x>360</x>
+       <y>70</y>
+       <width>71</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SPELLCASTING_SAVE_DC">
+     <property name="geometry">
+      <rect>
+       <x>491</x>
+       <y>70</y>
+       <width>71</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SPELL_ATTACK_BONUS">
+     <property name="geometry">
+      <rect>
+       <x>626</x>
+       <y>70</y>
+       <width>71</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SPELL_SLOT_1_TOTAL">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>410</y>
+       <width>41</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SPELL_SLOT_2_TOTAL">
+     <property name="geometry">
+      <rect>
+       <x>53</x>
+       <y>714</y>
+       <width>51</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SPELL_SLOT_1_EXPENDED">
+     <property name="geometry">
+      <rect>
+       <x>126</x>
+       <y>410</y>
+       <width>111</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SPELL_SLOT_2_EXPENDED">
+     <property name="geometry">
+      <rect>
+       <x>126</x>
+       <y>714</y>
+       <width>111</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SPELL_SLOT_3_TOTAL">
+     <property name="geometry">
+      <rect>
+       <x>302</x>
+       <y>186</y>
+       <width>41</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SPELL_SLOT_4_TOTAL">
+     <property name="geometry">
+      <rect>
+       <x>302</x>
+       <y>486</y>
+       <width>41</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SPELL_SLOT_5_TOTAL">
+     <property name="geometry">
+      <rect>
+       <x>303</x>
+       <y>788</y>
+       <width>41</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SPELL_SLOT_6_TOTAL">
+     <property name="geometry">
+      <rect>
+       <x>546</x>
+       <y>187</y>
+       <width>41</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SPELL_SLOT_7_TOTAL">
+     <property name="geometry">
+      <rect>
+       <x>546</x>
+       <y>413</y>
+       <width>41</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SPELLCASTING_ABILITY_11">
+     <property name="geometry">
+      <rect>
+       <x>620</x>
+       <y>410</y>
+       <width>101</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SPELL_SLOT_8_TOTAL">
+     <property name="geometry">
+      <rect>
+       <x>545</x>
+       <y>640</y>
+       <width>41</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SPELLCASTING_ABILITY_13">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>640</y>
+       <width>111</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SPELL_SLOT_9_TOTAL">
+     <property name="geometry">
+      <rect>
+       <x>544</x>
+       <y>825</y>
+       <width>41</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SPELL_SLOT_3_EXPENDED">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>186</y>
+       <width>111</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SPELL_SLOT_4_EXPENDED">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>486</y>
+       <width>111</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SPELL_SLOT_5_EXPENDED">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>788</y>
+       <width>111</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SPELL_SLOT_6_EXPENDED">
+     <property name="geometry">
+      <rect>
+       <x>612</x>
+       <y>186</y>
+       <width>111</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SPELL_SLOT_7_EXPENDED">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>413</y>
+       <width>111</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SPELL_SLOT_8_EXPENDED">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>640</y>
+       <width>111</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="SPELL_SLOT_9_EXPENDED">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>826</y>
+       <width>111</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
    </widget>
   </widget>
  </widget>
