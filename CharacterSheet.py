@@ -9,9 +9,17 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import character
+import utilities
 
 
 class CharacterSheetForm(object):
+    character = None
+
+    def __init__(self):
+        super().__init__()
+        self.createCharacter()
+
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(771, 1043)
@@ -139,10 +147,10 @@ class CharacterSheetForm(object):
         self.CON_ST_CHECK.setGeometry(QtCore.QRect(126, 411, 14, 14))
         self.CON_ST_CHECK.setText("")
         self.CON_ST_CHECK.setObjectName("CON_ST_CHECK")
-        self.INT_ST__CHECK = QtWidgets.QCheckBox(self.tab)
-        self.INT_ST__CHECK.setGeometry(QtCore.QRect(126, 501, 14, 14))
-        self.INT_ST__CHECK.setText("")
-        self.INT_ST__CHECK.setObjectName("INT_ST__CHECK")
+        self.INT_ST_CHECK = QtWidgets.QCheckBox(self.tab)
+        self.INT_ST_CHECK.setGeometry(QtCore.QRect(126, 501, 14, 14))
+        self.INT_ST_CHECK.setText("")
+        self.INT_ST_CHECK.setObjectName("INT_ST__CHECK")
         self.ARCANA_CHECK = QtWidgets.QCheckBox(self.tab)
         self.ARCANA_CHECK.setGeometry(QtCore.QRect(126, 513, 14, 14))
         self.ARCANA_CHECK.setText("")
@@ -249,12 +257,12 @@ class CharacterSheetForm(object):
         self.CON_ST_MOD.setFrame(False)
         self.CON_ST_MOD.setReadOnly(True)
         self.CON_ST_MOD.setObjectName("CON_ST_MOD")
-        self.INT_ST__MOD = QtWidgets.QLineEdit(self.tab)
-        self.INT_ST__MOD.setGeometry(QtCore.QRect(140, 501, 17, 14))
-        self.INT_ST__MOD.setMaxLength(2)
-        self.INT_ST__MOD.setFrame(False)
-        self.INT_ST__MOD.setReadOnly(True)
-        self.INT_ST__MOD.setObjectName("INT_ST__MOD")
+        self.INT_ST_MOD = QtWidgets.QLineEdit(self.tab)
+        self.INT_ST_MOD.setGeometry(QtCore.QRect(140, 501, 17, 14))
+        self.INT_ST_MOD.setMaxLength(2)
+        self.INT_ST_MOD.setFrame(False)
+        self.INT_ST_MOD.setReadOnly(True)
+        self.INT_ST_MOD.setObjectName("INT_ST_MOD")
         self.ARCANA_MOD = QtWidgets.QLineEdit(self.tab)
         self.ARCANA_MOD.setGeometry(QtCore.QRect(140, 513, 17, 14))
         self.ARCANA_MOD.setMaxLength(2)
@@ -774,6 +782,111 @@ class CharacterSheetForm(object):
         self.retranslateUi(Form)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Form)
+
+        self.updateValues()
+
+    def loadCharacter(self, path):
+        pass
+    
+    def saveCharacter(self, path):
+        pass
+
+    def createCharacter(self):
+        self.character = character.getDefault()
+
+    def updateValues(self):
+        self.PLAYER_NAME.setText(self.character["attributes"]["player name"])
+        self.CHARACTER_NAME_AND_TITLES.setText(self.character["attributes"]["character name"])
+        self.CHARACTER_NAME_AND_TITLES_2.setText(self.character["attributes"]["character name"])
+        self.CLASS.setText(self.character["attributes"]["class"])
+        self.RACE.setText(self.character["attributes"]["race"])
+        self.BACKGROUND.setText(self.character["attributes"]["background"])
+        self.LEVEL.setText(str(self.character["attributes"]["lvl"]))
+        self.NEXT_LVL_EXP.setText(str(self.character["attributes"]["exp"]))
+
+        strValue = self.character["attributes"]["stats"]["str"]
+        dexValue = self.character["attributes"]["stats"]["dex"]
+        conValue = self.character["attributes"]["stats"]["con"]
+        intValue = self.character["attributes"]["stats"]["int"]
+        wisValue = self.character["attributes"]["stats"]["wis"]
+        chaValue = self.character["attributes"]["stats"]["cha"]
+
+        self.STR_VALUE.setText(str(strValue))
+        self.DEX_VALUE.setText(str(dexValue))
+        self.CON_VALUE.setText(str(conValue))
+        self.INT_VALUE.setText(str(intValue))
+        self.WIS_VALUE.setText(str(wisValue))
+        self.CHA_VALUE.setText(str(chaValue))
+
+        self.updateStatsMod()
+
+        proBonus = utilities.culculateProficiencyBonus(self.character["attributes"]["lvl"])
+        self.PRO_BONUS.setText(str(proBonus))
+
+        self.updateSaveMod()
+
+        self.LANGUAGES.setText("\n".join(self.character["attributes"]["proficiencies"]))
+        self.INSP.setText(str(self.character["attributes"]["inspiration"]))
+
+    def updateStatsMod(self):
+        strValue = self.character["attributes"]["stats"]["str"]
+        dexValue = self.character["attributes"]["stats"]["dex"]
+        conValue = self.character["attributes"]["stats"]["con"]
+        intValue = self.character["attributes"]["stats"]["int"]
+        wisValue = self.character["attributes"]["stats"]["wis"]
+        chaValue = self.character["attributes"]["stats"]["cha"]
+
+        self.STR_MOD.setText(str(utilities.calculateModifier(strValue)))
+        self.DEX_MOD.setText(str(utilities.calculateModifier(dexValue)))
+        self.CON_MOD.setText(str(utilities.calculateModifier(conValue)))
+        self.INT_MOD.setText(str(utilities.calculateModifier(intValue)))
+        self.WIS_MOD.setText(str(utilities.calculateModifier(wisValue)))
+        self.CHA_MOD.setText(str(utilities.calculateModifier(chaValue)))
+
+    def updateSaveMod(self):
+        strValue = self.character["attributes"]["stats"]["str"]
+        dexValue = self.character["attributes"]["stats"]["dex"]
+        conValue = self.character["attributes"]["stats"]["con"]
+        intValue = self.character["attributes"]["stats"]["int"]
+        wisValue = self.character["attributes"]["stats"]["wis"]
+        chaValue = self.character["attributes"]["stats"]["cha"]
+
+        proBonus = utilities.culculateProficiencyBonus(self.character["attributes"]["lvl"])
+        if(self.character["attributes"]["saving throws"]["str"]):
+            self.STR_ST_CHECK.setChecked(True)
+            self.STR_ST_MOD.setText(str(proBonus + utilities.calculateModifier(strValue)))
+        else:
+            self.STR_ST_MOD.setText(str(utilities.calculateModifier(strValue)))
+        
+        if(self.character["attributes"]["saving throws"]["dex"]):
+            self.DEX_ST_CHECK.setChecked(True)
+            self.DEX_ST_MOD.setText(str(proBonus + utilities.calculateModifier(dexValue)))
+        else:
+            self.DEX_ST_MOD.setText(str(utilities.calculateModifier(dexValue)))
+        
+        if(self.character["attributes"]["saving throws"]["con"]):
+            self.CON_ST_CHECK.setChecked(True)
+            self.CON_ST_MOD.setText(str(proBonus + utilities.calculateModifier(conValue)))
+        else:
+            self.CON_ST_MOD.setText(str(utilities.calculateModifier(conValue)))
+        
+        if(self.character["attributes"]["saving throws"]["int"]):
+            self.INT_ST_CHECK.setChecked(True)
+            self.INT_ST_MOD.setText(str(proBonus + utilities.calculateModifier(intValue)))
+        else:
+            self.INT_ST_MOD.setText(str(utilities.calculateModifier(intValue)))
+        
+        if(self.character["attributes"]["saving throws"]["wis"]):
+            self.WIS_ST_CHECK.setChecked(True)
+            self.WIS_ST_MOD.setText(str(proBonus + utilities.calculateModifier(wisValue)))
+        else:
+            self.WIS_ST_MOD.setText(str(utilities.calculateModifier(wisValue)))
+
+        if(self.character["attributes"]["saving throws"]["cha"]):
+            self.CHA_ST_CHECK.setChecked(True)
+            self.CHA_ST_MOD.setText(str(proBonus + utilities.calculateModifier(chaValue)))
+        else:
+            self.CHA_ST_MOD.setText(str(utilities.calculateModifier(chaValue)))
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate

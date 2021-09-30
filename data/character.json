@@ -1,33 +1,33 @@
 {
-    "Attributes":
+    "attributes":
     {
-        "name": "",
-        "class": "",
-        "race": "",
-        "origin": "",
-        "ideology": "",
-        "lvl": 0,
-        "exp": 0,
-        "characteristics": 
+        "character name": "Wintari",
+        "player name": "Dmitry",
+        "class": "test",
+        "race": "etu",
+        "origin": "student",
+        "background": "dopsa",
+        "lvl": 4,
+        "exp": 1,
+        "stats": 
         {
-            "str": 0,
-            "dex": 0,
-            "con": 0,
-            "int": 0,
-            "wis": 0,
-            "cha": 0
+            "str": 10,
+            "dex": 5,
+            "con": 4,
+            "int": 9,
+            "wis": 1,
+            "cha": 20
         },
-        "proficiencies": [],
-        "inspiration": 0,
-        "proficiency bonus": 0,
+        "proficiencies": ["c++", "python"],
+        "inspiration": 2,
         "saving throws": 
         {
             "str": false,
             "dex": false,
             "con": false,
-            "int": false,
+            "int": true,
             "wis": false,
-            "cha": false
+            "cha": true
         },
         "skills": 
         {
@@ -50,29 +50,25 @@
             "stealth": 0,
             "survival": 0
         },
-        "ac": 0,
-        "initiative": 0,
-        "speed": 0,
-        "hit dice": 0,
         "max hp": 0,
         "cur hp": 0,
         "tmp hp": 0,
         "death saves": 0,
-        "atacks": [],
-        "equipment": [],
-        "personality traits": "",
-        "ideals": "",
-        "bonds": "",
-        "flaws": ""
+        "atacks": ["asd"],
+        "equipment": ["asd"],
+        "personality traits": "test",
+        "ideals": "kushot",
+        "bonds": "dopsa",
+        "flaws": "test"
     },
     "description":
     {
-        "age": 0,
-        "height": 0,
-        "weight": 0,
-        "eyes": "",
-        "skin": "",
-        "hair": "",
+        "age": 21,
+        "height": 176,
+        "weight": 56,
+        "eyes": "-",
+        "skin": "-",
+        "hair": "-",
         "image": "",
         "backstory": "",
         "allies": "",
