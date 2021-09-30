@@ -79,7 +79,8 @@ class Ui_PlayingField(object):
         self.central_area.setWidget(self.quickWidget_char)
 
         self.retranslateUi(PlayingField)
-        self.pushButton_log.clicked.connect(self.textEdit_log.selectAll)
+
+        self.pushButton_log.clicked.connect(self.sendMsg)
         QtCore.QMetaObject.connectSlotsByName(PlayingField)
 
 
@@ -117,5 +118,5 @@ class Ui_PlayingField(object):
         self.textBrowser_log.append(text)
 
     def sendMsg(self):
-        self.editLog(self.editLog.toPlainText())
+        self.editLog(self.textEdit_log.toPlainText())
 
