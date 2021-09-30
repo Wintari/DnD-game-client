@@ -5,7 +5,8 @@ class ThrowTypes(enum.Enum):
     summ = 0,
     advantage = 1,
     hindrance = 2,
-    withoutExtreme = 3
+    withoutMin = 3,
+    withoutMax = 4
 
 
 def throw(edges):
@@ -20,8 +21,9 @@ def throwMany(count, edges, type):
         return max(throws)
     elif(type is ThrowTypes.hindrance):
         return min(throws)
-    elif(type is ThrowTypes.withoutExtreme):
+    elif(type is ThrowTypes.withoutMin):
         throws.remove(min(throws))
+        return sum(throws)
+    elif(type is ThrowTypes.withoutMax):
         throws.remove(max(throws))
-
         return sum(throws)

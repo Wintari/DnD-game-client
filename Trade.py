@@ -10,8 +10,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
 class TradeForm(object):
+
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(1007, 651)
