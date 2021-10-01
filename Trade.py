@@ -42,6 +42,9 @@ class TradeForm(QtCore.QObject):
         self.label_2.setGeometry(QtCore.QRect(580, 10, 401, 21))
         self.label_2.setObjectName("label_2")
 
+        self.LeftFlag = False
+        self.RightFlag = False
+
         if self.uniqu:
             for i in self.LeftList:
                 self.RightList.remove(i)
@@ -73,15 +76,19 @@ class TradeForm(QtCore.QObject):
 
     def AllListChecked(self, item):
         self.currentRight = item.text()
+        self.LeftFlag = False
+        self.RightFlag = True
 
     def CharacterListChecked(self, item):
         self.currentLeft = item.text()
+        self.LeftFlag = True
+        self.RightFlag = False
 
     def finish(self):
         self.selected.emit(self.LeftList)
 
     def AddButtonPushed(self):
-        if self.currentRight:
+        if self.RightFlag:
             if self.uniqu:
                 if self.currentRight in self.LeftList:
                     return 0
@@ -91,7 +98,7 @@ class TradeForm(QtCore.QObject):
         self.CharacterList.addItems(self.LeftList)
 
     def DeleteButtonPushed(self):
-        if self.currentLeft:
+        if self.LeftFlag:
             self.LeftList.remove(self.currentLeft)
             self.RightList.sort()
         self.CharacterList.clear()
