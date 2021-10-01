@@ -12,9 +12,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class TradeForm(object):
 
-    def setupUi(self, Form):
+
+    def setupUi(self, Form, LeftList, RightList, uniqu=True):
         Form.setObjectName("Form")
         Form.resize(1007, 651)
+        self.LeftList = LeftList
+        self.RightList = RightList
+        self.uniqu = uniqu
         self.CharacterList = QtWidgets.QListWidget(Form)
         self.CharacterList.setGeometry(QtCore.QRect(10, 40, 421, 591))
         self.CharacterList.setObjectName("CharacterList")
@@ -37,6 +41,15 @@ class TradeForm(object):
         self.label_2.setGeometry(QtCore.QRect(580, 10, 401, 21))
         self.label_2.setObjectName("label_2")
 
+        self.AllList.addItems(self.RightList)
+        self.CharacterList.addItems(self.LeftList)
+
+        self.AllList.itemClicked.connect(self.AllListChecked)
+        self.CharacterList.itemClicked.connect(self.CharacterListChecked)
+        self.AddButton.clicked.connect(self.AddButtonPushed)
+        self.DeleteButton.clicked.connect(self.DeleteButtonPushed)
+        self.ConfirmButton.clicked.connect(self.ConfirmButtonPushed)
+
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
@@ -48,3 +61,27 @@ class TradeForm(object):
         self.ConfirmButton.setText(_translate("Form", "Ок"))
         self.label.setText(_translate("Form", "Персонаж:"))
         self.label_2.setText(_translate("Form", "Можно выбрать:"))
+
+    def AllListChecked(self, item):
+        self.currentRight = item.text()
+
+    def CharacterListChecked(self, item):
+        self.currentLeft = item.text()
+
+    def AddButtonPushed(self):
+        if self.currentRight:
+            if self.uniqu:
+                self.RightList.remove(self.currentRight)
+            self.LeftList.append(self.currentRight)
+            self.LeftList.sort()
+
+    def DeleteButtonPushed(self):
+        if self.currentLeft:
+            self.LeftList.remove(self.currentLeft)
+            if self.uniqu:
+                self.RightList.append(self.currentLeft)
+            self.RightList.sort()
+
+    def ConfirmButtonPushed(self):
+        QtCore.QCoreApplication.instance().quit()
+        pass
