@@ -19,6 +19,9 @@ class Ui_PlayingField(object):
     def setupUi(self, PlayingField):
         PlayingField.setObjectName("PlayingField")
         PlayingField.resize(1333, 613)
+        self.collectionButton = QtWidgets.QPushButton(PlayingField)
+        self.collectionButton.setGeometry(10,290,241,28)
+        self.collectionButton.setText("Коллекция")
         self.createButton = QtWidgets.QPushButton(PlayingField)
         self.createButton.setGeometry(10, 230, 241, 28)
         self.createButton.setText("Создать персонажа")
@@ -108,6 +111,8 @@ class Ui_PlayingField(object):
         self.pushButton_log.clicked.connect(self.sendMsg)
 
         self.pushButton_throw.clicked.connect(self.getThrowData)
+
+        self.collectionButton.clicked.connect(self.openCollection)
         QtCore.QMetaObject.connectSlotsByName(PlayingField)
 
 
@@ -172,4 +177,7 @@ class Ui_PlayingField(object):
 
     def createChar(self):
         self.central_ui.createCharacter()
+
+    def openCollection(self):
+        pass
 
