@@ -9,9 +9,10 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtWidgets import QFileDialog, QDialog
 import character
 import utilities
+import Trade
 
 
 class CharacterSheetForm(object):
@@ -798,12 +799,24 @@ class CharacterSheetForm(object):
         self.SPELL_SLOT_9_EXPENDED.setObjectName("SPELL_SLOT_9_EXPENDED")
         self.tabWidget.addTab(self.tab_3, "")
 
+        self.ADD_CONTRIPS.clicked.connect(self.openTrade)
+        self.ADD_SPELL_1.clicked.connect(self.openTrade)
+        self.ADD_SPELL_2.clicked.connect(self.openTrade)
+        self.ADD_SPELL_3.clicked.connect(self.openTrade)
+        self.ADD_SPELL_4.clicked.connect(self.openTrade)
+        self.ADD_SPELL_5.clicked.connect(self.openTrade)
+        self.ADD_SPELL_6.clicked.connect(self.openTrade)
+        self.ADD_SPELL_7.clicked.connect(self.openTrade)
+        self.ADD_SPELL_8.clicked.connect(self.openTrade)
+        self.ADD_SPELL_9.clicked.connect(self.openTrade)
+
         self.retranslateUi(Form)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
         self.createCharacter()
         self.connectAll()
+
 
     def loadCharacter(self, path):
         self.loaded = False
@@ -1334,3 +1347,13 @@ class CharacterSheetForm(object):
         self.ADD_SPELL_8.setText(_translate("Form", "Заклинания 8ур"))
         self.ADD_SPELL_9.setText(_translate("Form", "Заклинания 9ур"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("Form", "Заклинания и умения"))
+
+    def openTrade(self):
+        trade = QDialog()
+        trade.setWindowTitle("Коллекции.")
+
+        tradeUi = Trade.TradeForm()
+        tradeUi.setupUi(trade)
+
+        trade.exec()
+
