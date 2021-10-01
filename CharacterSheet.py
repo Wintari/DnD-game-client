@@ -64,7 +64,7 @@ class CharacterSheetForm(object):
         self.CON_MOD.setReadOnly(True)
         self.CON_MOD.setObjectName("CON_MOD")
         self.CON_VALUE = QtWidgets.QSpinBox(self.tab)
-        self.CON_VALUE.setGeometry(QtCore.QRect(65, 413, 40, 15))
+        self.CON_VALUE.setGeometry(QtCore.QRect(70, 413, 30, 15))
         self.CON_VALUE.setRange(1, 20)
         self.CON_VALUE.setFrame(False)
         self.CON_VALUE.setObjectName("CON_VALUE")
@@ -405,6 +405,7 @@ class CharacterSheetForm(object):
         self.CURRENT_EXP.setObjectName("CURRENT_EXP")
         self.CURRENT_EXP.setValidator(QtGui.QIntValidator(self.tab))
         self.NEXT_LVL_EXP = QtWidgets.QLineEdit(self.tab)
+        self.NEXT_LVL_EXP.setReadOnly(True)
         self.NEXT_LVL_EXP.setGeometry(QtCore.QRect(620, 86, 91, 16))
         self.NEXT_LVL_EXP.setMaxLength(100)
         self.NEXT_LVL_EXP.setFrame(False)
@@ -706,10 +707,12 @@ class CharacterSheetForm(object):
         self.SPELLCASTING_ABILITY.setFrame(False)
         self.SPELLCASTING_ABILITY.setObjectName("SPELLCASTING_ABILITY")
         self.SPELLCASTING_SAVE_DC = QtWidgets.QLineEdit(self.tab_3)
+        self.SPELLCASTING_SAVE_DC.setReadOnly(True)
         self.SPELLCASTING_SAVE_DC.setGeometry(QtCore.QRect(491, 70, 71, 20))
         self.SPELLCASTING_SAVE_DC.setFrame(False)
         self.SPELLCASTING_SAVE_DC.setObjectName("SPELLCASTING_SAVE_DC")
         self.SPELL_ATTACK_BONUS = QtWidgets.QLineEdit(self.tab_3)
+        self.SPELL_ATTACK_BONUS.setReadOnly(True)
         self.SPELL_ATTACK_BONUS.setGeometry(QtCore.QRect(626, 70, 71, 20))
         self.SPELL_ATTACK_BONUS.setFrame(False)
         self.SPELL_ATTACK_BONUS.setObjectName("SPELL_ATTACK_BONUS")
@@ -826,6 +829,32 @@ class CharacterSheetForm(object):
         self.CHA_VALUE.valueChanged.connect(self.mainAttributesChanged)
         self.LEVEL.textChanged.connect(self.mainAttributesChanged)
 
+        self.STR_ST_CHECK.clicked.connect(self.saveModsUpdated)
+        self.DEX_ST_CHECK.clicked.connect(self.saveModsUpdated)
+        self.CON_ST_CHECK.clicked.connect(self.saveModsUpdated)
+        self.INT_ST_CHECK.clicked.connect(self.saveModsUpdated)
+        self.WIS_ST_CHECK.clicked.connect(self.saveModsUpdated)
+        self.CHA_ST_CHECK.clicked.connect(self.saveModsUpdated)
+
+        self.ATHLETICS_CHECK.clicked.connect(self.skillsModsUpdated)
+        self.ACROBATICS_CHECK.clicked.connect(self.skillsModsUpdated)
+        self.SLEIGHT_OF_HAND_CHECK.clicked.connect(self.skillsModsUpdated)
+        self.STEALTH_CHECK.clicked.connect(self.skillsModsUpdated)
+        self.ARCANA_CHECK.clicked.connect(self.skillsModsUpdated)
+        self.HISTORY_CHECK.clicked.connect(self.skillsModsUpdated)
+        self.INVESTIGATION_CHECK.clicked.connect(self.skillsModsUpdated)
+        self.NATURE_CHECK.clicked.connect(self.skillsModsUpdated)
+        self.RELIGION_CHECK.clicked.connect(self.skillsModsUpdated)
+        self.ANIMAL_HANDLING_CHECK.clicked.connect(self.skillsModsUpdated)
+        self.INSIGHT_CHECK.clicked.connect(self.skillsModsUpdated)
+        self.MEDICINE_CHECK.clicked.connect(self.skillsModsUpdated)
+        self.PERCEPTION_CHECK.clicked.connect(self.skillsModsUpdated)
+        self.SURVIVAL_CHECK.clicked.connect(self.skillsModsUpdated)
+        self.DECEPTION_CHECK.clicked.connect(self.skillsModsUpdated)
+        self.INTIMIDATION_CHECK.clicked.connect(self.skillsModsUpdated)
+        self.PERFORMANCE_CHECK.clicked.connect(self.skillsModsUpdated)
+        self.PERSUASION_CHECK.clicked.connect(self.skillsModsUpdated)
+
         self.PLAYER_NAME.textChanged.connect(self.firstSheetAnyTextChanged)
         self.CHARACTER_NAME_AND_TITLES.textChanged.connect(self.firstSheetAnyTextChanged)
         self.CLASS.textChanged.connect(self.firstSheetAnyTextChanged)
@@ -885,6 +914,7 @@ class CharacterSheetForm(object):
 
             proBonus = utilities.calculateProficiencyBonus(self.character["attributes"]["lvl"])
             self.PRO_BONUS.setText(str(proBonus))
+            self.NEXT_LVL_EXP.setText(str(utilities.calculateMaxExp(self.character["attributes"]["lvl"])))
 
             self.updateStatsMod()
 
@@ -966,6 +996,7 @@ class CharacterSheetForm(object):
         self.BACKGROUND.setText(self.character["attributes"]["background"])
         self.LEVEL.setText(str(self.character["attributes"]["lvl"]))
         self.CURRENT_EXP.setText(str(self.character["attributes"]["exp"]))
+        self.NEXT_LVL_EXP.setText(str(utilities.calculateMaxExp(self.character["attributes"]["lvl"])))
 
         self.STR_VALUE.setValue(self.character["attributes"]["stats"]["str"])
         self.DEX_VALUE.setValue(self.character["attributes"]["stats"]["dex"])
@@ -1019,6 +1050,17 @@ class CharacterSheetForm(object):
         self.updateDeathSaves()
 
 
+    def saveModsUpdated(self):
+        if(self.loaded):
+            self.character["attributes"]["saving throws"]["str"] = self.STR_ST_CHECK.isChecked()
+            self.character["attributes"]["saving throws"]["dex"] = self.DEX_ST_CHECK.isChecked()
+            self.character["attributes"]["saving throws"]["con"] = self.CON_ST_CHECK.isChecked()
+            self.character["attributes"]["saving throws"]["int"] = self.INT_ST_CHECK.isChecked()
+            self.character["attributes"]["saving throws"]["wis"] = self.WIS_ST_CHECK.isChecked()
+            self.character["attributes"]["saving throws"]["cha"] = self.CHA_ST_CHECK.isChecked()
+
+            self.updateSaveMod()
+
     def updateSaveMod(self):
         strMod = utilities.calculateModifier(self.character["attributes"]["stats"]["str"])
         dexMod = utilities.calculateModifier(self.character["attributes"]["stats"]["dex"])
@@ -1067,6 +1109,29 @@ class CharacterSheetForm(object):
             self.CHA_ST_MOD.setText(str(proBonus + chaMod))
         else:
             self.CHA_ST_MOD.setText(str(chaMod))
+
+    def skillsModsUpdated(self):
+        if(self.loaded):
+            self.character["attributes"]["skills"]["athletics"] = self.ATHLETICS_CHECK.isChecked()
+            self.character["attributes"]["skills"]["acrobatics"] = self.ACROBATICS_CHECK.isChecked()
+            self.character["attributes"]["skills"]["sleight of hand"] = self.SLEIGHT_OF_HAND_CHECK.isChecked()
+            self.character["attributes"]["skills"]["stealth"] = self.STEALTH_CHECK.isChecked()
+            self.character["attributes"]["skills"]["arcana"] = self.ARCANA_CHECK.isChecked()
+            self.character["attributes"]["skills"]["history"] = self.HISTORY_CHECK.isChecked()
+            self.character["attributes"]["skills"]["investigation"] = self.INVESTIGATION_CHECK.isChecked()
+            self.character["attributes"]["skills"]["nature"] = self.NATURE_CHECK.isChecked()
+            self.character["attributes"]["skills"]["religion"] = self.RELIGION_CHECK.isChecked()
+            self.character["attributes"]["skills"]["animal handling"] = self.ANIMAL_HANDLING_CHECK.isChecked()
+            self.character["attributes"]["skills"]["insight"] = self.INSIGHT_CHECK.isChecked()
+            self.character["attributes"]["skills"]["medicine"] = self.MEDICINE_CHECK.isChecked()
+            self.character["attributes"]["skills"]["perception"] = self.PERCEPTION_CHECK.isChecked()
+            self.character["attributes"]["skills"]["survival"] = self.SURVIVAL_CHECK.isChecked()
+            self.character["attributes"]["skills"]["deception"] = self.DECEPTION_CHECK.isChecked()
+            self.character["attributes"]["skills"]["intimidation"] = self.INTIMIDATION_CHECK.isChecked()
+            self.character["attributes"]["skills"]["performance"] = self.PERFORMANCE_CHECK.isChecked()
+            self.character["attributes"]["skills"]["persuasion"] = self.PERSUASION_CHECK.isChecked()
+
+            self.updateSkillsMod()
 
     def updateSkillsMod(self):
         strMod = utilities.calculateModifier(self.character["attributes"]["stats"]["str"])
