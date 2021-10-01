@@ -420,7 +420,6 @@ class CharacterSheetForm(object):
         self.INITIATIVE.setGeometry(QtCore.QRect(360, 170, 41, 31))
         self.INITIATIVE.setMaxLength(2)
         self.INITIATIVE.setFrame(False)
-        self.INITIATIVE.setReadOnly(True)
         self.INITIATIVE.setObjectName("INITIATIVE")
         self.INITIATIVE.setValidator(QtGui.QIntValidator(self.tab))
         self.SPEED = QtWidgets.QLineEdit(self.tab)

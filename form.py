@@ -10,10 +10,9 @@
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 from PyQt5 import QtQuickWidgets
-from PyQt5.QtWidgets import QLineEdit
-import sys
 import CharacterSheet
 import dice
+import collections
 
 
 class Ui_PlayingField(object):

@@ -16,6 +16,7 @@ import spell
 import classes
 import races
 import items
+import backgounds
 
 class CollectionForm(object):
     def setupUi(self, Form):
@@ -444,7 +445,7 @@ class CollectionForm(object):
         self.CLASSES_LIST.addItems(classes.getNames())
         self.ITEM_LIST.addItems(items.getNames())
         self.RACES_LIST.addItems(races.getNames())
-        #self.BACKGROUND_LIST.addItems(spell.getNames())
+        self.BACKGROUND_LIST.addItems(backgounds.getNames())
 
     def loadCurrentItem(self, item):
         currentItem = items.get(item.text())
