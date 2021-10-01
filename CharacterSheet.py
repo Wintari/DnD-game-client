@@ -942,6 +942,7 @@ class CharacterSheetForm(object):
         self.WIS_MOD.setText(str(wisMod))
         self.CHA_MOD.setText(str(chaMod))
         self.PASSIVE_WISDOM.setText(str(10 + wisMod))
+        self.TOTAL_HIT_DICE.setText(str(self.character["attributes"]["lvl"]))
 
 
         self.updateSaveMod()

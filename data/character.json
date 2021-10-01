@@ -59,7 +59,6 @@
         "cur hp": "",
         "tmp hp": "",
         "death saves": 0,
-        "atacks": [],
         "equipment": [],
         "personality traits": "",
         "ideals": "",
@@ -82,68 +81,5 @@
         "symbol name": "",
         "features": "",
         "treasures": []
-    },
-    "spells":
-    {
-        "cantrips": [],
-        "1": 
-        {
-            "total slots": 0,
-            "expended slots": 0,
-            "spells": []
-        },
-        "2": 
-        {
-            "total slots": 0,
-            "expended slots": 0,
-            "spells": []
-        },
-        "3": 
-        {
-            "total slots": 0,
-            "expended slots": 0,
-            "spells": []
-        },
-        "4": 
-        {
-            "total slots": 0,
-            "expended slots": 0,
-            "spells": []
-        }
-        ,
-        "5": 
-        {
-            "total slots": 0,
-            "expended slots": 0,
-            "spells": []
-        }
-        ,
-        "6": 
-        {
-            "total slots": 0,
-            "expended slots": 0,
-            "spells": []
-        }
-        ,
-        "7": 
-        {
-            "total slots": 0,
-            "expended slots": 0,
-            "spells": []
-        }
-        ,
-        "8": 
-        {
-            "total slots": 0,
-            "expended slots": 0,
-            "spells": []
-        }
-        ,
-        "9": 
-        {
-            "total slots": 0,
-            "expended slots": 0,
-            "spells": []
-        }
     }
 }

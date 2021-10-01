@@ -20,7 +20,7 @@ import Collection
 class Ui_PlayingField(object):
     def setupUi(self, PlayingField):
         PlayingField.setObjectName("PlayingField")
-        PlayingField.resize(1333, 613)
+        PlayingField.setFixedSize(1333, 613)
         self.collectionButton = QtWidgets.QPushButton(PlayingField)
         self.collectionButton.setGeometry(10,290,241,28)
         self.collectionButton.setText("Коллекция")
@@ -53,7 +53,7 @@ class Ui_PlayingField(object):
         self.comboBox_edgeNumber = QtWidgets.QComboBox(PlayingField)
         self.comboBox_edgeNumber.setGeometry(QtCore.QRect(130, 80, 121, 21))
         self.comboBox_edgeNumber.setObjectName("comboBox_edgeNumber")
-        self.comboBox_edgeNumber.addItems(["4", "6", "8", "12", "16", "20", "100"])
+        self.comboBox_edgeNumber.addItems(["4", "6", "8", "10", "12", "16", "20", "100"])
         self.spinBox_modifically = QtWidgets.QSpinBox(PlayingField)
         self.spinBox_modifically.setGeometry(QtCore.QRect(130, 110, 121, 21))
         self.spinBox_modifically.setObjectName("spinBox_modifically")
