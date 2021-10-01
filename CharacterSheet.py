@@ -725,23 +725,25 @@ class CharacterSheetForm(object):
         self.EDIT_EQUIPMENT.clicked.connect(self.openTradeEquipment)
         self.EDIT_TREASURE.clicked.connect(self.openTradeTreasure)
 
-
-
     def openTradeEquipment(self):
         trade = QDialog()
-        trade.setWindowTitle("Коллекции.")
+        trade.setWindowTitle("Снаряжение.")
 
         tradeUi = Trade.TradeForm()
         tradeUi.setupUi(trade, self.character["attributes"]["equipment"], items.getNames(), True)
+
+        tradeUi.ConfirmButton.clicked.connect(trade.accept)
 
         trade.exec()
 
     def openTradeTreasure(self):
         trade = QDialog()
-        trade.setWindowTitle("Коллекции.")
+        trade.setWindowTitle("Инвентарь.")
 
         tradeUi = Trade.TradeForm()
         tradeUi.setupUi(trade, [], [], False)
+
+        tradeUi.ConfirmButton.clicked.connect(trade.accept)
 
         trade.exec()
 

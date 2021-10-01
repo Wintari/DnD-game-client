@@ -55,15 +55,12 @@ class TradeForm(object):
         self.CharacterList.itemClicked.connect(self.CharacterListChecked)
         self.AddButton.clicked.connect(self.AddButtonPushed)
         self.DeleteButton.clicked.connect(self.DeleteButtonPushed)
-        self.ConfirmButton.clicked.connect(self.ConfirmButtonPushed)
-
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
         self.AddButton.setText(_translate("Form", "<<<<<<<<<<<<<"))
         self.DeleteButton.setText(_translate("Form", ">>>>>>>>>>>>>"))
         self.ConfirmButton.setText(_translate("Form", "Ок"))
@@ -93,7 +90,3 @@ class TradeForm(object):
             self.RightList.sort()
         self.CharacterList.clear()
         self.CharacterList.addItems(self.LeftList)
-
-    def ConfirmButtonPushed(self):
-        QtCore.QCoreApplication.instance().quit()
-        pass
