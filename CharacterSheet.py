@@ -25,7 +25,7 @@ class CharacterSheetForm(object):
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(771, 1043)
+        Form.setFixedSize(771, 1043)
         self.tabWidget = QtWidgets.QTabWidget(Form)
         self.tabWidget.setGeometry(QtCore.QRect(0, 0, 871, 1171))
         self.tabWidget.setObjectName("tabWidget")

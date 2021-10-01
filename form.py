@@ -20,7 +20,7 @@ import Collection
 class Ui_PlayingField(object):
     def setupUi(self, PlayingField):
         PlayingField.setObjectName("PlayingField")
-        PlayingField.resize(1333, 613)
+        PlayingField.setFixedSize(1333, 613)
         self.collectionButton = QtWidgets.QPushButton(PlayingField)
         self.collectionButton.setGeometry(10,290,241,28)
         self.collectionButton.setText("Коллекция")
