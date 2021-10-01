@@ -41,6 +41,10 @@ class TradeForm(object):
         self.label_2.setGeometry(QtCore.QRect(580, 10, 401, 21))
         self.label_2.setObjectName("label_2")
 
+        if self.uniqu:
+            for i in self.LeftList:
+                self.RightList.remove(i)
+
         self.AllList.addItems(self.RightList)
         self.CharacterList.addItems(self.LeftList)
 
@@ -49,6 +53,7 @@ class TradeForm(object):
         self.AddButton.clicked.connect(self.AddButtonPushed)
         self.DeleteButton.clicked.connect(self.DeleteButtonPushed)
         self.ConfirmButton.clicked.connect(self.ConfirmButtonPushed)
+
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
