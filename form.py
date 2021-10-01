@@ -10,8 +10,10 @@
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 from PyQt5 import QtQuickWidgets
+from PyQt5.QtWidgets import QLineEdit
 import sys
 import CharacterSheet
+import dice
 
 
 class Ui_PlayingField(object):
@@ -19,13 +21,13 @@ class Ui_PlayingField(object):
         PlayingField.setObjectName("PlayingField")
         PlayingField.resize(1333, 613)
         self.createButton = QtWidgets.QPushButton(PlayingField)
-        self.createButton.setGeometry(10, 200, 241, 28)
+        self.createButton.setGeometry(10, 230, 241, 28)
         self.createButton.setText("Создать персонажа")
         self.loadButton = QtWidgets.QPushButton(PlayingField)
-        self.loadButton.setGeometry(10, 230, 115, 28)
+        self.loadButton.setGeometry(10, 260, 115, 28)
         self.loadButton.setText("Загрузить")
         self.saveButton = QtWidgets.QPushButton(PlayingField)
-        self.saveButton.setGeometry(136, 230, 115, 28)
+        self.saveButton.setGeometry(136, 260, 115, 28)
         self.saveButton.setText("Сохранить")
         self.textEdit_log = QtWidgets.QTextEdit(PlayingField)
         self.textEdit_log.setGeometry(QtCore.QRect(1080, 540, 181, 51))
@@ -36,21 +38,25 @@ class Ui_PlayingField(object):
         self.textBrowser_log = QtWidgets.QTextBrowser(PlayingField)
         self.textBrowser_log.setGeometry(QtCore.QRect(1080, 20, 241, 511))
         self.textBrowser_log.setObjectName("textBrowser_log")
-        self.comboBox_characteristic = QtWidgets.QComboBox(PlayingField)
+        self.comboBox_characteristic = QtWidgets.QSpinBox(PlayingField)
         self.comboBox_characteristic.setGeometry(QtCore.QRect(130, 20, 121, 21))
         self.comboBox_characteristic.setObjectName("comboBox_characteristic")
+        #self.comboBox_characteristic.addItems()
         self.spinBox_throwNumber = QtWidgets.QSpinBox(PlayingField)
-        self.spinBox_throwNumber.setGeometry(QtCore.QRect(130, 50, 42, 22))
+        self.spinBox_throwNumber.setGeometry(QtCore.QRect(130, 50, 121, 21))
         self.spinBox_throwNumber.setObjectName("spinBox_throwNumber")
+        self.spinBox_throwNumber.setMinimum(1)
         self.comboBox_edgeNumber = QtWidgets.QComboBox(PlayingField)
-        self.comboBox_edgeNumber.setGeometry(QtCore.QRect(130, 80, 121, 22))
+        self.comboBox_edgeNumber.setGeometry(QtCore.QRect(130, 80, 121, 21))
         self.comboBox_edgeNumber.setObjectName("comboBox_edgeNumber")
+        self.comboBox_edgeNumber.addItems(["4", "6", "8", "12", "16", "20", "100"])
         self.spinBox_modifically = QtWidgets.QSpinBox(PlayingField)
-        self.spinBox_modifically.setGeometry(QtCore.QRect(130, 110, 42, 22))
+        self.spinBox_modifically.setGeometry(QtCore.QRect(130, 110, 121, 21))
         self.spinBox_modifically.setObjectName("spinBox_modifically")
         self.comboBox_throwType = QtWidgets.QComboBox(PlayingField)
-        self.comboBox_throwType.setGeometry(QtCore.QRect(130, 140, 121, 22))
+        self.comboBox_throwType.setGeometry(QtCore.QRect(130, 140, 121, 21))
         self.comboBox_throwType.setObjectName("comboBox_throwType")
+        self.comboBox_throwType.addItems(["Сумма", "С преимуществом", "С помехой", "Без минимума", "Без максимума"])
         self.label_charecteristic = QtWidgets.QLabel(PlayingField)
         self.label_charecteristic.setGeometry(QtCore.QRect(10, 20, 111, 16))
         self.label_charecteristic.setObjectName("label_charecteristic")
@@ -88,6 +94,10 @@ class Ui_PlayingField(object):
         self.central_area.setGeometry(QtCore.QRect(264, 0, 800, 613))
         self.central_area.setWidget(self.quickWidget_char)
 
+        self.throwResult = QtWidgets.QLineEdit(PlayingField)
+        self.throwResult.setGeometry(10, 200, 241, 28)
+        self.throwResult.setReadOnly(1)
+
         self.retranslateUi(PlayingField)
 
         self.loadButton.clicked.connect(self.loadChar)
@@ -97,6 +107,8 @@ class Ui_PlayingField(object):
         self.createButton.clicked.connect(self.createChar)
 
         self.pushButton_log.clicked.connect(self.sendMsg)
+
+        self.pushButton_throw.clicked.connect(self.getThrowData)
         QtCore.QMetaObject.connectSlotsByName(PlayingField)
 
 
@@ -104,7 +116,7 @@ class Ui_PlayingField(object):
         _translate = QtCore.QCoreApplication.translate
         PlayingField.setWindowTitle(_translate("PlayingField", "PlayingField"))
         self.pushButton_log.setText(_translate("PlayingField", "OK"))
-        self.label_charecteristic.setText(_translate("PlayingField", "Характеристика"))
+        self.label_charecteristic.setText(_translate("PlayingField", "Модиф. хар-ки"))
         self.label_throwNumber.setText(_translate("PlayingField", "Кол-во бросков"))
         self.label_edgeNumber.setText(_translate("PlayingField", "Кол-во граней"))
         self.label_modifically.setText(_translate("PlayingField", "Модификатор"))
@@ -122,12 +134,25 @@ class Ui_PlayingField(object):
         self.comboBox_throwType.addItems(list)
 
     def getThrowData(self):
-        characteristic = self.comboBox_characteristic.currentText()
+        characteristic = self.comboBox_characteristic.value()
         throwNumber = self.spinBox_throwNumber.value()
-        edgeNumber = self.comboBox_edgeNumber.currentText()
+        edgeNumber = int(self.comboBox_edgeNumber.currentText())
         modifically = self.spinBox_modifically.value()
-        throwType = self.comboBox_throwType.currentText()
-        self.sendThrow.emit(characteristic, throwNumber, edgeNumber, modifically, throwType)
+        throwType_str = self.comboBox_throwType.currentText()
+        if(throwType_str == "Сумма"):
+            throwType = dice.ThrowTypes.summ
+        elif(throwType_str == "С преимуществом"):
+            throwType = dice.ThrowTypes.advantage
+        elif(throwType_str == "С помехой"):
+            throwType = dice.ThrowTypes.hindrance
+        elif(throwType_str == "Без минимума"):
+            throwType = dice.ThrowTypes.withoutMin
+        elif(throwType_str == "Без максимума"):
+            throwType = dice.ThrowTypes.withoutMax
+        res = dice.throwMany(throwNumber, edgeNumber, throwType, modifically, characteristic)
+        self.textBrowser_log.append("Результат броска " +str(res)+ "!")
+        self.throwResult.clear()
+        self.throwResult.setText(str(res))
 
     def editLog(self, text):
         self.textBrowser_log.append(text)

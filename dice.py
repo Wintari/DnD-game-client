@@ -9,12 +9,11 @@ class ThrowTypes(enum.Enum):
     withoutMax = 4
 
 
-def throw(edges):
-    return random.randint(1, edges)
+def throw(edges, modifically, characteristic):
+    return random.randint(1, edges) + modifically + characteristic
 
-def throwMany(count, edges, type):
-    throws = [throw(edges) for i in range(0, count)]
-
+def throwMany(count, edges, type, modifically, characteristic):
+    throws = [throw(edges, modifically, characteristic) for i in range(0, count)]
     if(type is ThrowTypes.summ):
         return sum(throws)
     elif(type is ThrowTypes.advantage):
