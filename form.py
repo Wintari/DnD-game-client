@@ -137,11 +137,13 @@ class Ui_PlayingField(object):
 
     def loadChar(self):
         path = str(QFileDialog.getOpenFileName(filter='*')[0])
-        self.central_ui.loadCharacter(path)
+        if len(path) > 0:
+            self.central_ui.loadCharacter(path)
     
     def saveChar(self):
         path = str(QFileDialog.getSaveFileName(filter='*')[0])
-        self.central_ui.saveCharacter(path)
+        if len(path) > 0:
+            self.central_ui.saveCharacter(path)
 
 
     def createChar(self):
