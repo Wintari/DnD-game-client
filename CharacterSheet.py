@@ -25,7 +25,7 @@ class CharacterSheetForm(object):
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.setFixedSize(771, 1043)
+        Form.resize(771, 1043)
         self.tabWidget = QtWidgets.QTabWidget(Form)
         self.tabWidget.setGeometry(QtCore.QRect(0, 0, 871, 1171))
         self.tabWidget.setObjectName("tabWidget")
@@ -727,26 +727,19 @@ class CharacterSheetForm(object):
 
     def openTradeEquipment(self):
         trade = QDialog()
-        trade.setWindowTitle("Снаряжение.")
-
+        trade.setWindowTitle("Коллекции.")
+        self.equipments = self.character["attributes"]["equipment"]
         tradeUi = Trade.TradeForm()
-        tradeUi.setupUi(trade, self.character["attributes"]["equipment"], items.getNames(), True)
-
-        tradeUi.ConfirmButton.clicked.connect(trade.accept)
-
+        tradeUi.setupUi(trade, self.equipments, items.getNames(), True)
         trade.exec()
 
     def openTradeTreasure(self):
         trade = QDialog()
-        trade.setWindowTitle("Инвентарь.")
-
+        trade.setWindowTitle("Коллекции.")
+        self.treasure = self.character["description"]["treasures"]
         tradeUi = Trade.TradeForm()
-        tradeUi.setupUi(trade, [], [], False)
-
-        tradeUi.ConfirmButton.clicked.connect(trade.accept)
-
+        tradeUi.setupUi(trade, self.treasure, items.getNames(), False)
         trade.exec()
-
 
     def mainAttributesChanged(self):
         if(self.loaded):

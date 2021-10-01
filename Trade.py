@@ -9,12 +9,14 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import CharacterSheet
 
 class TradeForm(object):
 
+
     def setupUi(self, Form, LeftList, RightList, uniqu=True):
         Form.setObjectName("Form")
-        Form.setFixedSize(1007, 651)
+        Form.resize(1007, 651)
         self.LeftList = LeftList
         self.RightList = RightList
         self.uniqu = uniqu
