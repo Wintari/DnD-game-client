@@ -45,6 +45,9 @@ class TradeForm(object):
             for i in self.LeftList:
                 self.RightList.remove(i)
 
+        self.RightList.sort()
+        self.LeftList.sort()
+
         self.AllList.addItems(self.RightList)
         self.CharacterList.addItems(self.LeftList)
 
