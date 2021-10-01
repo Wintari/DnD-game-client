@@ -161,12 +161,12 @@ class Ui_PlayingField(object):
         self.editLog(self.textEdit_log.toPlainText())
 
     def loadChar(self):
-        path = str(QFileDialog.getOpenFileName(filter='*')[0])
+        path = str(QFileDialog.getOpenFileName(directory="./data/characters",filter='*.json')[0])
         if len(path) > 0:
             self.central_ui.loadCharacter(path)
     
     def saveChar(self):
-        path = str(QFileDialog.getSaveFileName(filter='*')[0])
+        path = str(QFileDialog.getSaveFileName(directory="./data/characters", filter='*.json')[0])
         if len(path) > 0:
             self.central_ui.saveCharacter(path)
 

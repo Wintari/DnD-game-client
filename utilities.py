@@ -1,5 +1,5 @@
 def calculateModifier(NakedValue):
-    return int(NakedValue / 2) - 5
+    return int((NakedValue - 10) / 2)
 
 
 def calculateMaxExp(currentLvl):
@@ -45,7 +45,7 @@ def calculateMaxExp(currentLvl):
         return 0
 
 
-def culculateProficiencyBonus(currentLvl):
+def calculateProficiencyBonus(currentLvl):
     if currentLvl <= 4:
         return 2
     elif currentLvl <= 9:

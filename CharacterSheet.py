@@ -9,16 +9,17 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QFileDialog
 import character
 import utilities
 
 
 class CharacterSheetForm(object):
     character = None
+    loaded = False
 
     def __init__(self):
         super().__init__()
-        self.createCharacter()
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -33,9 +34,9 @@ class CharacterSheetForm(object):
         self.label.setText("")
         self.label.setPixmap(QtGui.QPixmap("./data/images/CharacterSheet1.jpg"))
         self.label.setObjectName("label")
-        self.STR_VALUE = QtWidgets.QLineEdit(self.tab)
-        self.STR_VALUE.setGeometry(QtCore.QRect(68, 237, 21, 15))
-        self.STR_VALUE.setMaxLength(2)
+        self.STR_VALUE = QtWidgets.QSpinBox(self.tab)
+        self.STR_VALUE.setGeometry(QtCore.QRect(70, 237, 30, 15))
+        self.STR_VALUE.setRange(1, 20)
         self.STR_VALUE.setFrame(False)
         self.STR_VALUE.setObjectName("STR_VALUE")
         self.STR_MOD = QtWidgets.QLineEdit(self.tab)
@@ -44,9 +45,9 @@ class CharacterSheetForm(object):
         self.STR_MOD.setAlignment(QtCore.Qt.AlignCenter)
         self.STR_MOD.setReadOnly(True)
         self.STR_MOD.setObjectName("STR_MOD")
-        self.DEX_VALUE = QtWidgets.QLineEdit(self.tab)
-        self.DEX_VALUE.setGeometry(QtCore.QRect(68, 325, 21, 15))
-        self.DEX_VALUE.setMaxLength(2)
+        self.DEX_VALUE = QtWidgets.QSpinBox(self.tab)
+        self.DEX_VALUE.setGeometry(QtCore.QRect(70, 325, 30, 15))
+        self.DEX_VALUE.setRange(1, 20)
         self.DEX_VALUE.setFrame(False)
         self.DEX_VALUE.setObjectName("DEX_VALUE")
         self.DEX_MOD = QtWidgets.QLineEdit(self.tab)
@@ -62,14 +63,14 @@ class CharacterSheetForm(object):
         self.CON_MOD.setDragEnabled(False)
         self.CON_MOD.setReadOnly(True)
         self.CON_MOD.setObjectName("CON_MOD")
-        self.CON_VALUE = QtWidgets.QLineEdit(self.tab)
-        self.CON_VALUE.setGeometry(QtCore.QRect(68, 413, 21, 15))
-        self.CON_VALUE.setMaxLength(2)
+        self.CON_VALUE = QtWidgets.QSpinBox(self.tab)
+        self.CON_VALUE.setGeometry(QtCore.QRect(65, 413, 40, 15))
+        self.CON_VALUE.setRange(1, 20)
         self.CON_VALUE.setFrame(False)
         self.CON_VALUE.setObjectName("CON_VALUE")
-        self.INT_VALUE = QtWidgets.QLineEdit(self.tab)
-        self.INT_VALUE.setGeometry(QtCore.QRect(68, 501, 21, 15))
-        self.INT_VALUE.setMaxLength(2)
+        self.INT_VALUE = QtWidgets.QSpinBox(self.tab)
+        self.INT_VALUE.setGeometry(QtCore.QRect(70, 501, 30, 15))
+        self.INT_VALUE.setRange(1, 20)
         self.INT_VALUE.setFrame(False)
         self.INT_VALUE.setObjectName("INT_VALUE")
         self.INT_MOD = QtWidgets.QLineEdit(self.tab)
@@ -78,9 +79,9 @@ class CharacterSheetForm(object):
         self.INT_MOD.setAlignment(QtCore.Qt.AlignCenter)
         self.INT_MOD.setReadOnly(True)
         self.INT_MOD.setObjectName("INT_MOD")
-        self.WIS_VALUE = QtWidgets.QLineEdit(self.tab)
-        self.WIS_VALUE.setGeometry(QtCore.QRect(68, 589, 21, 15))
-        self.WIS_VALUE.setMaxLength(2)
+        self.WIS_VALUE = QtWidgets.QSpinBox(self.tab)
+        self.WIS_VALUE.setGeometry(QtCore.QRect(70, 589, 30, 15))
+        self.WIS_VALUE.setRange(1, 20)
         self.WIS_VALUE.setFrame(False)
         self.WIS_VALUE.setObjectName("WIS_VALUE")
         self.WIS_MOD = QtWidgets.QLineEdit(self.tab)
@@ -89,9 +90,9 @@ class CharacterSheetForm(object):
         self.WIS_MOD.setAlignment(QtCore.Qt.AlignCenter)
         self.WIS_MOD.setReadOnly(True)
         self.WIS_MOD.setObjectName("WIS_MOD")
-        self.CHA_VALUE = QtWidgets.QLineEdit(self.tab)
-        self.CHA_VALUE.setGeometry(QtCore.QRect(68, 677, 21, 15))
-        self.CHA_VALUE.setMaxLength(2)
+        self.CHA_VALUE = QtWidgets.QSpinBox(self.tab)
+        self.CHA_VALUE.setGeometry(QtCore.QRect(70, 677, 30, 15))
+        self.CHA_VALUE.setRange(1, 20)
         self.CHA_VALUE.setFrame(False)
         self.CHA_VALUE.setObjectName("CHA_VALUE")
         self.CHA_MOD = QtWidgets.QLineEdit(self.tab)
@@ -119,6 +120,7 @@ class CharacterSheetForm(object):
         self.INSP.setGeometry(QtCore.QRect(63, 196, 31, 20))
         self.INSP.setFrame(False)
         self.INSP.setObjectName("INSP")
+        self.INSP.setValidator(QtGui.QIntValidator(self.tab))
         self.STR_ST_CHECK = QtWidgets.QCheckBox(self.tab)
         self.STR_ST_CHECK.setGeometry(QtCore.QRect(126, 235, 14, 14))
         self.STR_ST_CHECK.setText("")
@@ -353,12 +355,12 @@ class CharacterSheetForm(object):
         self.PERFORMANCE_MOD.setFrame(False)
         self.PERFORMANCE_MOD.setReadOnly(True)
         self.PERFORMANCE_MOD.setObjectName("PERFORMANCE_MOD")
-        self.PERSUATION_MOD = QtWidgets.QLineEdit(self.tab)
-        self.PERSUATION_MOD.setGeometry(QtCore.QRect(140, 724, 17, 14))
-        self.PERSUATION_MOD.setMaxLength(2)
-        self.PERSUATION_MOD.setFrame(False)
-        self.PERSUATION_MOD.setReadOnly(True)
-        self.PERSUATION_MOD.setObjectName("PERSUATION_MOD")
+        self.PERSUASION_MOD = QtWidgets.QLineEdit(self.tab)
+        self.PERSUASION_MOD.setGeometry(QtCore.QRect(140, 724, 17, 14))
+        self.PERSUASION_MOD.setMaxLength(2)
+        self.PERSUASION_MOD.setFrame(False)
+        self.PERSUASION_MOD.setReadOnly(True)
+        self.PERSUASION_MOD.setObjectName("PERSUASION_MOD")
         self.PASSIVE_WISDOM = QtWidgets.QLineEdit(self.tab)
         self.PASSIVE_WISDOM.setGeometry(QtCore.QRect(63, 761, 31, 20))
         self.PASSIVE_WISDOM.setMaxLength(2)
@@ -375,6 +377,7 @@ class CharacterSheetForm(object):
         self.LEVEL.setMaxLength(2)
         self.LEVEL.setFrame(False)
         self.LEVEL.setObjectName("LEVEL")
+        self.LEVEL.setValidator(QtGui.QIntValidator(self.tab))
         self.BACKGROUND = QtWidgets.QLineEdit(self.tab)
         self.BACKGROUND.setGeometry(QtCore.QRect(470, 52, 81, 16))
         self.BACKGROUND.setMaxLength(100)
@@ -400,37 +403,44 @@ class CharacterSheetForm(object):
         self.CURRENT_EXP.setMaxLength(100)
         self.CURRENT_EXP.setFrame(False)
         self.CURRENT_EXP.setObjectName("CURRENT_EXP")
+        self.CURRENT_EXP.setValidator(QtGui.QIntValidator(self.tab))
         self.NEXT_LVL_EXP = QtWidgets.QLineEdit(self.tab)
         self.NEXT_LVL_EXP.setGeometry(QtCore.QRect(620, 86, 91, 16))
         self.NEXT_LVL_EXP.setMaxLength(100)
         self.NEXT_LVL_EXP.setFrame(False)
         self.NEXT_LVL_EXP.setObjectName("NEXT_LVL_EXP")
+        self.NEXT_LVL_EXP.setValidator(QtGui.QIntValidator(self.tab))
         self.ARMOR_CLASS = QtWidgets.QLineEdit(self.tab)
         self.ARMOR_CLASS.setGeometry(QtCore.QRect(290, 179, 41, 21))
         self.ARMOR_CLASS.setMaxLength(2)
         self.ARMOR_CLASS.setFrame(False)
         self.ARMOR_CLASS.setObjectName("ARMOR_CLASS")
+        self.ARMOR_CLASS.setValidator(QtGui.QIntValidator(self.tab))
         self.INITIATIVE = QtWidgets.QLineEdit(self.tab)
         self.INITIATIVE.setGeometry(QtCore.QRect(360, 170, 41, 31))
         self.INITIATIVE.setMaxLength(2)
         self.INITIATIVE.setFrame(False)
         self.INITIATIVE.setReadOnly(True)
         self.INITIATIVE.setObjectName("INITIATIVE")
+        self.INITIATIVE.setValidator(QtGui.QIntValidator(self.tab))
         self.SPEED = QtWidgets.QLineEdit(self.tab)
         self.SPEED.setGeometry(QtCore.QRect(430, 170, 51, 31))
         self.SPEED.setMaxLength(2)
         self.SPEED.setFrame(False)
         self.SPEED.setObjectName("SPEED")
+        self.SPEED.setValidator(QtGui.QIntValidator(self.tab))
         self.CURRENT_HP = QtWidgets.QLineEdit(self.tab)
         self.CURRENT_HP.setGeometry(QtCore.QRect(300, 260, 171, 31))
         self.CURRENT_HP.setMaxLength(10)
         self.CURRENT_HP.setFrame(False)
         self.CURRENT_HP.setObjectName("CURRENT_HP")
+        self.CURRENT_HP.setValidator(QtGui.QIntValidator(self.tab))
         self.TEMPORARY_HP = QtWidgets.QLineEdit(self.tab)
         self.TEMPORARY_HP.setGeometry(QtCore.QRect(300, 330, 171, 31))
         self.TEMPORARY_HP.setMaxLength(100)
         self.TEMPORARY_HP.setFrame(False)
         self.TEMPORARY_HP.setObjectName("TEMPORARY_HP")
+        self.TEMPORARY_HP.setValidator(QtGui.QIntValidator(self.tab))
         self.HIT_DICE = QtWidgets.QLineEdit(self.tab)
         self.HIT_DICE.setGeometry(QtCore.QRect(290, 410, 81, 21))
         self.HIT_DICE.setMaxLength(100)
@@ -478,6 +488,7 @@ class CharacterSheetForm(object):
         self.MAX_HP.setFrame(False)
         self.MAX_HP.setReadOnly(False)
         self.MAX_HP.setObjectName("MAX_HP")
+        self.MAX_HP.setValidator(QtGui.QIntValidator(self.tab))
         self.TOTAL_HIT_DICE = QtWidgets.QLineEdit(self.tab)
         self.TOTAL_HIT_DICE.setGeometry(QtCore.QRect(310, 390, 61, 16))
         self.TOTAL_HIT_DICE.setMaxLength(2)
@@ -516,10 +527,10 @@ class CharacterSheetForm(object):
         self.label_2.setText("")
         self.label_2.setPixmap(QtGui.QPixmap("./data/images/CharacterSheet2.jpg"))
         self.label_2.setObjectName("label_2")
-        self.Symbol = QtWidgets.QLabel(self.tab_2)
-        self.Symbol.setGeometry(QtCore.QRect(530, 220, 181, 141))
-        self.Symbol.setText("")
-        self.Symbol.setObjectName("Symbol")
+        self.SYMBOL = QtWidgets.QLabel(self.tab_2)
+        self.SYMBOL.setGeometry(QtCore.QRect(530, 220, 181, 141))
+        self.SYMBOL.setText("")
+        self.SYMBOL.setObjectName("Symbol")
         self.SYMBOL_NAME = QtWidgets.QLineEdit(self.tab_2)
         self.SYMBOL_NAME.setGeometry(QtCore.QRect(532, 197, 179, 17))
         self.SYMBOL_NAME.setMaxLength(100)
@@ -528,7 +539,7 @@ class CharacterSheetForm(object):
         self.SYMBOL_NAME.setAlignment(QtCore.Qt.AlignCenter)
         self.SYMBOL_NAME.setObjectName("SYMBOL_NAME")
         self.ALLIES = QtWidgets.QTextEdit(self.tab_2)
-        self.ALLIES.setGeometry(QtCore.QRect(270, 168, 241, 286))
+        self.ALLIES.setGeometry(QtCore.QRect(270, 160, 241, 286))
         self.ALLIES.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.ALLIES.setObjectName("ALLIES")
         self.ADDITIONAL_TRAITS = QtWidgets.QTextEdit(self.tab_2)
@@ -536,6 +547,7 @@ class CharacterSheetForm(object):
         self.ADDITIONAL_TRAITS.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.ADDITIONAL_TRAITS.setObjectName("ADDITIONAL_TRAITS")
         self.CHARACTER_NAME_AND_TITLES_2 = QtWidgets.QLineEdit(self.tab_2)
+        self.CHARACTER_NAME_AND_TITLES_2.setReadOnly(True)
         self.CHARACTER_NAME_AND_TITLES_2.setGeometry(QtCore.QRect(50, 80, 261, 20))
         self.CHARACTER_NAME_AND_TITLES_2.setFrame(False)
         self.CHARACTER_NAME_AND_TITLES_2.setAlignment(QtCore.Qt.AlignCenter)
@@ -544,13 +556,13 @@ class CharacterSheetForm(object):
         self.BACKSTORY.setGeometry(QtCore.QRect(24, 504, 221, 491))
         self.BACKSTORY.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.BACKSTORY.setObjectName("BACKSTORY")
-        self.TRESURE = QtWidgets.QListView(self.tab_2)
-        self.TRESURE.setGeometry(QtCore.QRect(273, 797, 461, 171))
-        self.TRESURE.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.TRESURE.setObjectName("TRESURE")
-        self.EDIT_TREUSURE = QtWidgets.QPushButton(self.tab_2)
-        self.EDIT_TREUSURE.setGeometry(QtCore.QRect(460, 973, 91, 23))
-        self.EDIT_TREUSURE.setObjectName("EDIT_TREUSURE")
+        self.TREASURE = QtWidgets.QListView(self.tab_2)
+        self.TREASURE.setGeometry(QtCore.QRect(273, 797, 461, 171))
+        self.TREASURE.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.TREASURE.setObjectName("TREASURE")
+        self.EDIT_TREASURE = QtWidgets.QPushButton(self.tab_2)
+        self.EDIT_TREASURE.setGeometry(QtCore.QRect(460, 973, 91, 23))
+        self.EDIT_TREASURE.setObjectName("EDIT_TREASURE")
         self.CHARACTER_APPEARANCE = QtWidgets.QLabel(self.tab_2)
         self.CHARACTER_APPEARANCE.setGeometry(QtCore.QRect(30, 170, 211, 251))
         self.CHARACTER_APPEARANCE.setText("")
@@ -565,14 +577,17 @@ class CharacterSheetForm(object):
         self.AGE.setGeometry(QtCore.QRect(330, 60, 113, 18))
         self.AGE.setFrame(False)
         self.AGE.setObjectName("AGE")
+        self.AGE.setValidator(QtGui.QIntValidator(self.tab))
         self.HEIGHT = QtWidgets.QLineEdit(self.tab_2)
         self.HEIGHT.setGeometry(QtCore.QRect(450, 60, 113, 18))
         self.HEIGHT.setFrame(False)
         self.HEIGHT.setObjectName("HEIGHT")
+        self.HEIGHT.setValidator(QtGui.QIntValidator(self.tab))
         self.WEIGHT = QtWidgets.QLineEdit(self.tab_2)
         self.WEIGHT.setGeometry(QtCore.QRect(590, 60, 113, 18))
         self.WEIGHT.setFrame(False)
         self.WEIGHT.setObjectName("WEIGHT")
+        self.WEIGHT.setValidator(QtGui.QIntValidator(self.tab))
         self.EYES = QtWidgets.QLineEdit(self.tab_2)
         self.EYES.setGeometry(QtCore.QRect(330, 93, 113, 18))
         self.EYES.setFrame(False)
@@ -587,13 +602,13 @@ class CharacterSheetForm(object):
         self.HAIR.setObjectName("HAIR")
         self.label_2.raise_()
         self.SYMBOL_NAME.raise_()
-        self.Symbol.raise_()
+        self.SYMBOL.raise_()
         self.ALLIES.raise_()
         self.ADDITIONAL_TRAITS.raise_()
         self.CHARACTER_NAME_AND_TITLES_2.raise_()
         self.BACKSTORY.raise_()
-        self.TRESURE.raise_()
-        self.EDIT_TREUSURE.raise_()
+        self.TREASURE.raise_()
+        self.EDIT_TREASURE.raise_()
         self.CHARACTER_APPEARANCE.raise_()
         self.EDIT_APPEARANCE.raise_()
         self.EDIT_SYMBOL.raise_()
@@ -682,10 +697,12 @@ class CharacterSheetForm(object):
         self.ADD_SPELL_9.setGeometry(QtCore.QRect(578, 973, 101, 23))
         self.ADD_SPELL_9.setObjectName("ADD_SPELL_9")
         self.SPELLCASTING_CLASS = QtWidgets.QLineEdit(self.tab_3)
+        self.SPELLCASTING_CLASS.setReadOnly(True)
         self.SPELLCASTING_CLASS.setGeometry(QtCore.QRect(70, 80, 241, 20))
         self.SPELLCASTING_CLASS.setFrame(False)
         self.SPELLCASTING_CLASS.setObjectName("SPELLCASTING_CLASS")
         self.SPELLCASTING_ABILITY = QtWidgets.QLineEdit(self.tab_3)
+        self.SPELLCASTING_ABILITY.setReadOnly(True)
         self.SPELLCASTING_ABILITY.setGeometry(QtCore.QRect(360, 70, 71, 20))
         self.SPELLCASTING_ABILITY.setFrame(False)
         self.SPELLCASTING_ABILITY.setObjectName("SPELLCASTING_ABILITY")
@@ -783,117 +800,462 @@ class CharacterSheetForm(object):
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
-        self.updateValues()
+        self.createCharacter()
+        self.connectAll()
 
     def loadCharacter(self, path):
+        self.loaded = False
         self.character = character.load(path)
+        self.updateValues()
+        self.loaded = True
     
     def saveCharacter(self, path):
         character.save(path, self.character)
 
     def createCharacter(self):
+        self.loaded = False
         self.character = character.getDefault()
+        self.updateValues()
+        self.loaded = True
+
+    def connectAll(self):
+        self.STR_VALUE.valueChanged.connect(self.mainAttributesChanged)
+        self.DEX_VALUE.valueChanged.connect(self.mainAttributesChanged)
+        self.CON_VALUE.valueChanged.connect(self.mainAttributesChanged)
+        self.INT_VALUE.valueChanged.connect(self.mainAttributesChanged)
+        self.WIS_VALUE.valueChanged.connect(self.mainAttributesChanged)
+        self.CHA_VALUE.valueChanged.connect(self.mainAttributesChanged)
+        self.LEVEL.textChanged.connect(self.mainAttributesChanged)
+
+        self.PLAYER_NAME.textChanged.connect(self.firstSheetAnyTextChanged)
+        self.CHARACTER_NAME_AND_TITLES.textChanged.connect(self.firstSheetAnyTextChanged)
+        self.CLASS.textChanged.connect(self.firstSheetAnyTextChanged)
+        self.RACE.textChanged.connect(self.firstSheetAnyTextChanged)
+        self.ALIGMENT.textChanged.connect(self.firstSheetAnyTextChanged)
+        self.BACKGROUND.textChanged.connect(self.firstSheetAnyTextChanged)
+        self.CURRENT_EXP.textChanged.connect(self.firstSheetAnyTextChanged)
+        self.LANGUAGES.textChanged.connect(self.firstSheetAnyTextChanged)
+        self.INSP.textChanged.connect(self.firstSheetAnyTextChanged)
+        self.ARMOR_CLASS.textChanged.connect(self.firstSheetAnyTextChanged)
+        self.INITIATIVE.textChanged.connect(self.firstSheetAnyTextChanged)
+        self.SPEED.textChanged.connect(self.firstSheetAnyTextChanged)
+        self.HIT_DICE.textChanged.connect(self.firstSheetAnyTextChanged)
+        self.MAX_HP.textChanged.connect(self.firstSheetAnyTextChanged)
+        self.CURRENT_HP.textChanged.connect(self.firstSheetAnyTextChanged)
+        self.TEMPORARY_HP.textChanged.connect(self.firstSheetAnyTextChanged)
+        self.PERS_TRAITS.textChanged.connect(self.firstSheetAnyTextChanged)
+        self.IDEALS.textChanged.connect(self.firstSheetAnyTextChanged)
+        self.BONDS.textChanged.connect(self.firstSheetAnyTextChanged)
+        self.FLAWS.textChanged.connect(self.firstSheetAnyTextChanged)
+        self.FEATURES_AND_TRAITS.textChanged.connect(self.firstSheetAnyTextChanged)
+
+        self.FAILURES_DEATH_SAVE_1.clicked.connect(self.deathSavesUpdated)
+        self.FAILURES_DEATH_SAVE_2.clicked.connect(self.deathSavesUpdated)
+        self.FAILURES_DEATH_SAVE_3.clicked.connect(self.deathSavesUpdated)
+        self.SUCCESSES_DEATH_SAVE_1.clicked.connect(self.deathSavesUpdated)
+        self.SUCCESSES_DEATH_SAVE_2.clicked.connect(self.deathSavesUpdated)
+        self.SUCCESSES_DEATH_SAVE_3.clicked.connect(self.deathSavesUpdated)
+
+        self.AGE.textChanged.connect(self.secondSheetAnyTextChanged)
+        self.HEIGHT.textChanged.connect(self.secondSheetAnyTextChanged)
+        self.WEIGHT.textChanged.connect(self.secondSheetAnyTextChanged)
+        self.EYES.textChanged.connect(self.secondSheetAnyTextChanged)
+        self.SKIN.textChanged.connect(self.secondSheetAnyTextChanged)
+        self.HAIR.textChanged.connect(self.secondSheetAnyTextChanged)
+        self.SYMBOL_NAME.textChanged.connect(self.secondSheetAnyTextChanged)
+        self.BACKSTORY.textChanged.connect(self.secondSheetAnyTextChanged)
+        self.ALLIES.textChanged.connect(self.secondSheetAnyTextChanged)
+        self.ADDITIONAL_TRAITS.textChanged.connect(self.secondSheetAnyTextChanged)
+
+        self.EDIT_APPEARANCE.clicked.connect(self.loadCharImage)
+        self.EDIT_SYMBOL.clicked.connect(self.loadCharSymbol)
+
+    def mainAttributesChanged(self):
+        if(self.loaded):
+            self.character["attributes"]["stats"]["str"] = self.STR_VALUE.value()
+            self.character["attributes"]["stats"]["dex"] = self.DEX_VALUE.value()
+            self.character["attributes"]["stats"]["con"] = self.CON_VALUE.value()
+            self.character["attributes"]["stats"]["int"] = self.INT_VALUE.value()
+            self.character["attributes"]["stats"]["wis"] = self.WIS_VALUE.value()
+            self.character["attributes"]["stats"]["cha"] = self.CHA_VALUE.value()
+
+            try:
+                self.character["attributes"]["lvl"] = int(self.LEVEL.text())
+            except:
+                self.character["attributes"]["lvl"] = 0
+
+            proBonus = utilities.calculateProficiencyBonus(self.character["attributes"]["lvl"])
+            self.PRO_BONUS.setText(str(proBonus))
+
+            self.updateStatsMod()
+
+    def firstSheetAnyTextChanged(self):
+        if(self.loaded):
+            self.character["attributes"]["player name"] = self.PLAYER_NAME.text()
+            self.character["attributes"]["character name"] = self.CHARACTER_NAME_AND_TITLES.text()
+            self.character["attributes"]["class"] = self.CLASS.text()
+            self.character["attributes"]["race"] = self.RACE.text()
+            self.character["attributes"]["alignment"] = self.ALIGMENT.text()
+            self.character["attributes"]["background"] =  self.BACKGROUND.text()
+            self.character["attributes"]["exp"] = self.CURRENT_EXP.text()
+
+            self.character["attributes"]["proficiencies"] = self.LANGUAGES.toPlainText()
+            self.character["attributes"]["inspiration"] = self.INSP.text()
+
+            self.character["attributes"]["ac"] = self.ARMOR_CLASS.text()
+            self.character["attributes"]["initiative"] = self.INITIATIVE.text()
+            self.character["attributes"]["speed"] = self.SPEED.text()
+
+            self.character["attributes"]["hit dice"] = self.HIT_DICE.text()
+            self.character["attributes"]["max hp"] =  self.MAX_HP.text()
+            self.character["attributes"]["cur hp"] = self.CURRENT_HP.text()
+            self.character["attributes"]["tmp hp"] = self.TEMPORARY_HP.text()
+
+            self.character["attributes"]["personality traits"] = self.PERS_TRAITS.toPlainText()
+            self.character["attributes"]["ideals"] = self.IDEALS.toPlainText()
+            self.character["attributes"]["bonds"] = self.BONDS.toPlainText()
+            self.character["attributes"]["flaws"] = self.FLAWS.toPlainText()
+            self.character["attributes"]["features"] = self.FEATURES_AND_TRAITS.toPlainText()
+
+            self.CHARACTER_NAME_AND_TITLES_2.setText(self.character["attributes"]["character name"])
+            self.SPELLCASTING_CLASS.setText(self.character["attributes"]["class"])
+    
+    def secondSheetAnyTextChanged(self):
+        if(self.loaded):
+            self.character["description"]["age"] = self.AGE.text()
+            self.character["description"]["height"] = self.HEIGHT.text()
+            self.character["description"]["weight"] = self.WEIGHT.text()
+            self.character["description"]["eyes"] = self.EYES.text()
+            self.character["description"]["skin"] = self.SKIN.text()
+            self.character["description"]["hair"] = self.HAIR.text()
+            self.character["description"]["symbol name"] = self.SYMBOL_NAME.text()
+            self.character["description"]["backstory"] = self.BACKSTORY.toPlainText()
+            self.character["description"]["allies"] = self.ALLIES.toPlainText()
+            self.character["description"]["features"] = self.ADDITIONAL_TRAITS.toPlainText()
+
 
     def updateValues(self):
+        self.updateAttributes()
+        self.updateDescription()
+        self.updateSpells()
+
+    def updateDescription(self):
+        self.CHARACTER_NAME_AND_TITLES_2.setText(self.character["attributes"]["character name"])
+        self.AGE.setText(self.character["description"]["age"])
+        self.HEIGHT.setText(self.character["description"]["height"])
+        self.WEIGHT.setText(self.character["description"]["weight"])
+        self.EYES.setText(self.character["description"]["eyes"])
+        self.SKIN.setText(self.character["description"]["skin"])
+        self.HAIR.setText(self.character["description"]["hair"])
+        self.CHARACTER_APPEARANCE.setPixmap(QtGui.QPixmap(self.character["description"]["image"]).scaledToWidth(self.CHARACTER_APPEARANCE.size().width()))
+        self.SYMBOL_NAME.setText(self.character["description"]["symbol name"])
+        self.SYMBOL.setPixmap(QtGui.QPixmap(self.character["description"]["symbol"]).scaledToWidth(self.SYMBOL.size().width()))
+        self.BACKSTORY.setText(self.character["description"]["backstory"])
+        self.ALLIES.setText(self.character["description"]["allies"])
+        self.ADDITIONAL_TRAITS.setText(self.character["description"]["features"])
+
+    def updateSpells(self):
+        self.SPELLCASTING_CLASS.setText(self.character["attributes"]["class"])
+        self.SPELLCASTING_ABILITY.setText("WIS")
+
+    def updateAttributes(self):
         self.PLAYER_NAME.setText(self.character["attributes"]["player name"])
         self.CHARACTER_NAME_AND_TITLES.setText(self.character["attributes"]["character name"])
-        self.CHARACTER_NAME_AND_TITLES_2.setText(self.character["attributes"]["character name"])
         self.CLASS.setText(self.character["attributes"]["class"])
         self.RACE.setText(self.character["attributes"]["race"])
+        self.ALIGMENT.setText(self.character["attributes"]["alignment"])
         self.BACKGROUND.setText(self.character["attributes"]["background"])
         self.LEVEL.setText(str(self.character["attributes"]["lvl"]))
-        self.NEXT_LVL_EXP.setText(str(self.character["attributes"]["exp"]))
+        self.CURRENT_EXP.setText(str(self.character["attributes"]["exp"]))
 
-        strValue = self.character["attributes"]["stats"]["str"]
-        dexValue = self.character["attributes"]["stats"]["dex"]
-        conValue = self.character["attributes"]["stats"]["con"]
-        intValue = self.character["attributes"]["stats"]["int"]
-        wisValue = self.character["attributes"]["stats"]["wis"]
-        chaValue = self.character["attributes"]["stats"]["cha"]
-
-        self.STR_VALUE.setText(str(strValue))
-        self.DEX_VALUE.setText(str(dexValue))
-        self.CON_VALUE.setText(str(conValue))
-        self.INT_VALUE.setText(str(intValue))
-        self.WIS_VALUE.setText(str(wisValue))
-        self.CHA_VALUE.setText(str(chaValue))
+        self.STR_VALUE.setValue(self.character["attributes"]["stats"]["str"])
+        self.DEX_VALUE.setValue(self.character["attributes"]["stats"]["dex"])
+        self.CON_VALUE.setValue(self.character["attributes"]["stats"]["con"])
+        self.INT_VALUE.setValue(self.character["attributes"]["stats"]["int"])
+        self.WIS_VALUE.setValue(self.character["attributes"]["stats"]["wis"])
+        self.CHA_VALUE.setValue(self.character["attributes"]["stats"]["cha"])
 
         self.updateStatsMod()
 
-        proBonus = utilities.culculateProficiencyBonus(self.character["attributes"]["lvl"])
+        proBonus = utilities.calculateProficiencyBonus(self.character["attributes"]["lvl"])
         self.PRO_BONUS.setText(str(proBonus))
 
-        self.updateSaveMod()
+        self.LANGUAGES.setText(self.character["attributes"]["proficiencies"])
+        self.INSP.setText(self.character["attributes"]["inspiration"])
 
-        self.LANGUAGES.setText("\n".join(self.character["attributes"]["proficiencies"]))
-        self.INSP.setText(str(self.character["attributes"]["inspiration"]))
+        self.ARMOR_CLASS.setText(self.character["attributes"]["ac"])
+        self.INITIATIVE.setText(self.character["attributes"]["initiative"])
+        self.SPEED.setText(self.character["attributes"]["speed"])
+
+        self.HIT_DICE.setText(self.character["attributes"]["hit dice"])
+        self.MAX_HP.setText(self.character["attributes"]["max hp"])
+        self.CURRENT_HP.setText(self.character["attributes"]["cur hp"])
+        self.TEMPORARY_HP.setText(self.character["attributes"]["tmp hp"])
+
+        self.PERS_TRAITS.setText(self.character["attributes"]["personality traits"])
+        self.IDEALS.setText(self.character["attributes"]["ideals"])
+        self.BONDS.setText(self.character["attributes"]["bonds"])
+        self.FLAWS.setText(self.character["attributes"]["flaws"])
+        self.FEATURES_AND_TRAITS.setText(self.character["attributes"]["features"])
 
     def updateStatsMod(self):
-        strValue = self.character["attributes"]["stats"]["str"]
-        dexValue = self.character["attributes"]["stats"]["dex"]
-        conValue = self.character["attributes"]["stats"]["con"]
-        intValue = self.character["attributes"]["stats"]["int"]
-        wisValue = self.character["attributes"]["stats"]["wis"]
-        chaValue = self.character["attributes"]["stats"]["cha"]
+        strMod = utilities.calculateModifier(self.character["attributes"]["stats"]["str"])
+        dexMod = utilities.calculateModifier(self.character["attributes"]["stats"]["dex"])
+        conMod = utilities.calculateModifier(self.character["attributes"]["stats"]["con"])
+        intMod = utilities.calculateModifier(self.character["attributes"]["stats"]["int"])
+        wisMod = utilities.calculateModifier(self.character["attributes"]["stats"]["wis"])
+        chaMod = utilities.calculateModifier(self.character["attributes"]["stats"]["cha"])
 
-        self.STR_MOD.setText(str(utilities.calculateModifier(strValue)))
-        self.DEX_MOD.setText(str(utilities.calculateModifier(dexValue)))
-        self.CON_MOD.setText(str(utilities.calculateModifier(conValue)))
-        self.INT_MOD.setText(str(utilities.calculateModifier(intValue)))
-        self.WIS_MOD.setText(str(utilities.calculateModifier(wisValue)))
-        self.CHA_MOD.setText(str(utilities.calculateModifier(chaValue)))
+        self.STR_MOD.setText(str(strMod))
+        self.DEX_MOD.setText(str(dexMod))
+        self.CON_MOD.setText(str(conMod))
+        self.INT_MOD.setText(str(intMod))
+        self.WIS_MOD.setText(str(wisMod))
+        self.CHA_MOD.setText(str(chaMod))
+        self.PASSIVE_WISDOM.setText(str(10 + wisMod))
+
+
+        self.updateSaveMod()
+        self.updateSkillsMod()
+        self.updateDeathSaves()
+
 
     def updateSaveMod(self):
-        strValue = self.character["attributes"]["stats"]["str"]
-        dexValue = self.character["attributes"]["stats"]["dex"]
-        conValue = self.character["attributes"]["stats"]["con"]
-        intValue = self.character["attributes"]["stats"]["int"]
-        wisValue = self.character["attributes"]["stats"]["wis"]
-        chaValue = self.character["attributes"]["stats"]["cha"]
+        strMod = utilities.calculateModifier(self.character["attributes"]["stats"]["str"])
+        dexMod = utilities.calculateModifier(self.character["attributes"]["stats"]["dex"])
+        conMod = utilities.calculateModifier(self.character["attributes"]["stats"]["con"])
+        intMod = utilities.calculateModifier(self.character["attributes"]["stats"]["int"])
+        wisMod = utilities.calculateModifier(self.character["attributes"]["stats"]["wis"])
+        chaMod = utilities.calculateModifier(self.character["attributes"]["stats"]["cha"])
 
-        proBonus = utilities.culculateProficiencyBonus(self.character["attributes"]["lvl"])
+        proBonus = utilities.calculateProficiencyBonus(self.character["attributes"]["lvl"])
+
+        self.SPELLCASTING_SAVE_DC.setText(str(8 + wisMod + proBonus))
+        self.SPELL_ATTACK_BONUS.setText(str(wisMod + proBonus))
+
         if(self.character["attributes"]["saving throws"]["str"]):
             self.STR_ST_CHECK.setChecked(True)
-            self.STR_ST_MOD.setText(str(proBonus + utilities.calculateModifier(strValue)))
+            self.STR_ST_MOD.setText(str(proBonus + strMod))
         else:
-            self.STR_ST_MOD.setText(str(utilities.calculateModifier(strValue)))
+            self.STR_ST_MOD.setText(str(strMod))
         
         if(self.character["attributes"]["saving throws"]["dex"]):
             self.DEX_ST_CHECK.setChecked(True)
-            self.DEX_ST_MOD.setText(str(proBonus + utilities.calculateModifier(dexValue)))
+            self.DEX_ST_MOD.setText(str(proBonus + dexMod))
         else:
-            self.DEX_ST_MOD.setText(str(utilities.calculateModifier(dexValue)))
+            self.DEX_ST_MOD.setText(str(dexMod))
         
         if(self.character["attributes"]["saving throws"]["con"]):
             self.CON_ST_CHECK.setChecked(True)
-            self.CON_ST_MOD.setText(str(proBonus + utilities.calculateModifier(conValue)))
+            self.CON_ST_MOD.setText(str(proBonus + conMod))
         else:
-            self.CON_ST_MOD.setText(str(utilities.calculateModifier(conValue)))
+            self.CON_ST_MOD.setText(str(conMod))
         
         if(self.character["attributes"]["saving throws"]["int"]):
             self.INT_ST_CHECK.setChecked(True)
-            self.INT_ST_MOD.setText(str(proBonus + utilities.calculateModifier(intValue)))
+            self.INT_ST_MOD.setText(str(proBonus + intMod))
         else:
-            self.INT_ST_MOD.setText(str(utilities.calculateModifier(intValue)))
+            self.INT_ST_MOD.setText(str(intMod))
         
         if(self.character["attributes"]["saving throws"]["wis"]):
             self.WIS_ST_CHECK.setChecked(True)
-            self.WIS_ST_MOD.setText(str(proBonus + utilities.calculateModifier(wisValue)))
+            self.WIS_ST_MOD.setText(str(proBonus + wisMod))
         else:
-            self.WIS_ST_MOD.setText(str(utilities.calculateModifier(wisValue)))
+            self.WIS_ST_MOD.setText(str(wisMod))
 
         if(self.character["attributes"]["saving throws"]["cha"]):
             self.CHA_ST_CHECK.setChecked(True)
-            self.CHA_ST_MOD.setText(str(proBonus + utilities.calculateModifier(chaValue)))
+            self.CHA_ST_MOD.setText(str(proBonus + chaMod))
         else:
-            self.CHA_ST_MOD.setText(str(utilities.calculateModifier(chaValue)))
+            self.CHA_ST_MOD.setText(str(chaMod))
+
+    def updateSkillsMod(self):
+        strMod = utilities.calculateModifier(self.character["attributes"]["stats"]["str"])
+        dexMod = utilities.calculateModifier(self.character["attributes"]["stats"]["dex"])
+        conMod = utilities.calculateModifier(self.character["attributes"]["stats"]["con"])
+        intMod = utilities.calculateModifier(self.character["attributes"]["stats"]["int"])
+        wisMod = utilities.calculateModifier(self.character["attributes"]["stats"]["wis"])
+        chaMod = utilities.calculateModifier(self.character["attributes"]["stats"]["cha"])
+
+        proBonus = utilities.calculateProficiencyBonus(self.character["attributes"]["lvl"])
+        
+        if(self.character["attributes"]["skills"]["athletics"]):
+            self.ATHLETICS_CHECK.setChecked(True)
+            self.ATHLETICS_MOD.setText(str(proBonus + strMod))
+        else:
+            self.ATHLETICS_MOD.setText(str(strMod))
+        
+        if(self.character["attributes"]["skills"]["acrobatics"]):
+            self.ACROBATICS_CHECK.setChecked(True)
+            self.ACROBATICS_MOD.setText(str(proBonus + dexMod))
+        else:
+            self.ACROBATICS_MOD.setText(str(dexMod))
+
+        if(self.character["attributes"]["skills"]["sleight of hand"]):
+            self.SLEIGHT_OF_HAND_CHECK.setChecked(True)
+            self.SLEIGHT_OF_HAND_MOD.setText(str(proBonus + dexMod))
+        else:
+            self.SLEIGHT_OF_HAND_MOD.setText(str(dexMod))
+
+        if(self.character["attributes"]["skills"]["stealth"]):
+            self.STEALTH_CHECK.setChecked(True)
+            self.STEALTH_MOD.setText(str(proBonus + dexMod))
+        else:
+            self.STEALTH_MOD.setText(str(dexMod))
+
+        if(self.character["attributes"]["skills"]["arcana"]):
+            self.ARCANA_CHECK.setChecked(True)
+            self.ARCANA_MOD.setText(str(proBonus + intMod))
+        else:
+            self.ARCANA_MOD.setText(str(intMod))
+
+        if(self.character["attributes"]["skills"]["history"]):
+            self.HISTORY_CHECK.setChecked(True)
+            self.HISTORY_MOD.setText(str(proBonus + intMod))
+        else:
+            self.HISTORY_MOD.setText(str(intMod))
+
+        if(self.character["attributes"]["skills"]["investigation"]):
+            self.INVESTIGATION_CHECK.setChecked(True)
+            self.INVESTIGATION_MOD.setText(str(proBonus + intMod))
+        else:
+            self.INVESTIGATION_MOD.setText(str(intMod))
+        
+        if(self.character["attributes"]["skills"]["nature"]):
+            self.NATURE_CHECK.setChecked(True)
+            self.NATURE_MOD.setText(str(proBonus + intMod))
+        else:
+            self.NATURE_MOD.setText(str(intMod))
+
+        if(self.character["attributes"]["skills"]["religion"]):
+            self.RELIGION_CHECK.setChecked(True)
+            self.RELIGION_MOD.setText(str(proBonus + intMod))
+        else:
+            self.RELIGION_MOD.setText(str(intMod))
+
+        if(self.character["attributes"]["skills"]["animal handling"]):
+            self.ANIMAL_HANDLING_CHECK.setChecked(True)
+            self.ANIMAL_HANDLING_MOD.setText(str(proBonus + wisMod))
+        else:
+            self.ANIMAL_HANDLING_MOD.setText(str(wisMod))
+
+        if(self.character["attributes"]["skills"]["insight"]):
+            self.INSIGHT_CHECK.setChecked(True)
+            self.INSIGHT_MOD.setText(str(proBonus + wisMod))
+        else:
+            self.INSIGHT_MOD.setText(str(wisMod))
+
+        if(self.character["attributes"]["skills"]["medicine"]):
+            self.MEDICINE_CHECK.setChecked(True)
+            self.MEDICINE_MOD.setText(str(proBonus + wisMod))
+        else:
+            self.MEDICINE_MOD.setText(str(wisMod))
+
+        if(self.character["attributes"]["skills"]["perception"]):
+            self.PERCEPTION_CHECK.setChecked(True)
+            self.PERCEPTION_MOD.setText(str(proBonus + wisMod))
+        else:
+            self.PERCEPTION_MOD.setText(str(wisMod))
+
+        if(self.character["attributes"]["skills"]["survival"]):
+            self.SURVIVAL_CHECK.setChecked(True)
+            self.SURVIVAL_MOD.setText(str(proBonus + wisMod))
+        else:
+            self.SURVIVAL_MOD.setText(str(wisMod))
+
+        if(self.character["attributes"]["skills"]["deception"]):
+            self.DECEPTION_CHECK.setChecked(True)
+            self.DECEPTION_MOD.setText(str(proBonus + chaMod))
+        else:
+            self.DECEPTION_MOD.setText(str(chaMod))
+
+        if(self.character["attributes"]["skills"]["intimidation"]):
+            self.INTIMIDATION_CHECK.setChecked(True)
+            self.INTIMIDATION_MOD.setText(str(proBonus + chaMod))
+        else:
+            self.INTIMIDATION_MOD.setText(str(chaMod))
+
+        if(self.character["attributes"]["skills"]["performance"]):
+            self.PERFORMANCE_CHECK.setChecked(True)
+            self.PERFORMANCE_MOD.setText(str(proBonus + chaMod))
+        else:
+            self.PERFORMANCE_MOD.setText(str(chaMod))
+
+        if(self.character["attributes"]["skills"]["persuasion"]):
+            self.PERSUASION_CHECK.setChecked(True)
+            self.PERSUASION_MOD.setText(str(proBonus + chaMod))
+        else:
+            self.PERSUASION_MOD.setText(str(chaMod))
+
+    def deathSavesUpdated(self):
+        if(self.loaded):
+            checks = [self.FAILURES_DEATH_SAVE_3.isChecked(), 
+                    self.FAILURES_DEATH_SAVE_2.isChecked(),
+                    self.FAILURES_DEATH_SAVE_1.isChecked(),
+                    self.SUCCESSES_DEATH_SAVE_1.isChecked(),
+                    self.SUCCESSES_DEATH_SAVE_2.isChecked(),
+                    self.SUCCESSES_DEATH_SAVE_3.isChecked()]
+
+            print(checks)
+            
+            if(checks[2] and not checks[1] and not checks[0]):
+                self.character["attributes"]["death saves"] = -1
+            elif(checks[1] and not checks[0]):
+                self.character["attributes"]["death saves"] = -2
+            elif(checks[0]):
+                self.character["attributes"]["death saves"] = -3
+            elif(checks[5]):
+                self.character["attributes"]["death saves"] = 3
+            elif(checks[4] and not checks[5]):
+                self.character["attributes"]["death saves"] = 2
+            elif(checks[3] and not checks[4] and not checks[5]):
+                self.character["attributes"]["death saves"] = 1
+            else:
+                self.character["attributes"]["death saves"] = 0
+            self.updateDeathSaves()
+    
+    def updateDeathSaves(self):
+        active = self.character["attributes"]["death saves"]
+        checksSucc = [
+                  self.SUCCESSES_DEATH_SAVE_1,
+                  self.SUCCESSES_DEATH_SAVE_2,
+                  self.SUCCESSES_DEATH_SAVE_3]
+        checksFail = [
+                  self.FAILURES_DEATH_SAVE_1, 
+                  self.FAILURES_DEATH_SAVE_2,
+                  self.FAILURES_DEATH_SAVE_3]
+
+        if(active > 0):
+            for i in range(0, abs(active)):
+                checksSucc[i].setChecked(True)
+
+            for i in range(0, len(checksFail)):
+                checksFail[i].setChecked(False)
+        elif(active < 0):
+            for i in range(0, abs(active)):
+                checksFail[i].setChecked(True)
+
+            for i in range(0, len(checksSucc)):
+                checksSucc[i].setChecked(False)
+            
+    def loadCharImage(self):
+        path = str(QFileDialog.getOpenFileName(directory="./data/characters")[0])
+        self.character["description"]["image"] = path
+        self.CHARACTER_APPEARANCE.setPixmap(QtGui.QPixmap(path).scaledToWidth(self.CHARACTER_APPEARANCE.size().width()))
+    
+    def loadCharSymbol(self):
+        path = str(QFileDialog.getOpenFileName(directory="./data/characters")[0])
+        self.character["description"]["symbol"] = path
+        self.SYMBOL.setPixmap(QtGui.QPixmap(path).scaledToWidth(self.SYMBOL.size().width()))
+
+        
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.EDIT_EQUIPMENT.setText(_translate("Form", "Редактировать"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("Form", "Характеристики"))
-        self.EDIT_TREUSURE.setText(_translate("Form", "Редактировать"))
+        self.EDIT_TREASURE.setText(_translate("Form", "Редактировать"))
         self.EDIT_APPEARANCE.setText(_translate("Form", "Внешность"))
         self.EDIT_SYMBOL.setText(_translate("Form", "Герб"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("Form", "Описание персонажа"))

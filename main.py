@@ -9,5 +9,6 @@ if __name__ == "__main__":
     window = QtWidgets.QMainWindow()
     ui.setupUi(window)
 
+    window.setWindowTitle("D&D Helper")
     window.show()
     app.exec()
