@@ -9,7 +9,13 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import *
+from PyQt5.QtCore import Qt
 
+import spell
+import classes
+import races
+import items
 
 class CollectionForm(object):
     def setupUi(self, Form):
@@ -376,6 +382,14 @@ class CollectionForm(object):
         self.tabWidget_3.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
+        self.loadNames()
+
+        self.SPELLS_LIST.itemClicked.connect(self.loadCurrentSpell)
+        self.CLASSES_LIST.itemClicked.connect(self.loadCurrentClass)
+        self.ITEM_LIST.itemClicked.connect(self.loadCurrentItem)
+        self.RACES_LIST.itemClicked.connect(self.loadCurrentRace)
+        self.BACKGROUND_LIST.itemClicked.connect(self.loadCurrentBackground)
+
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
@@ -423,3 +437,85 @@ class CollectionForm(object):
         self.label_493.setText(_translate("Form", "Длительность:"))
         self.label_494.setText(_translate("Form", "Классы:"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Spells1), _translate("Form", "Заклинания"))
+
+
+    def loadNames(self):
+        self.SPELLS_LIST.addItems(spell.getNames())
+        self.CLASSES_LIST.addItems(classes.getNames())
+        self.ITEM_LIST.addItems(items.getNames())
+        self.RACES_LIST.addItems(races.getNames())
+        #self.BACKGROUND_LIST.addItems(spell.getNames())
+
+    def loadCurrentItem(self, item):
+        currentItem = items.get(item.text())
+        self.CATEGORIES.setText(str(currentItem["type"]))
+        model = QtGui.QStandardItemModel()
+        self.PECULIARITIES.setModel(model)
+        for i in currentItem["peculiarity"]:
+            item = QtGui.QStandardItem(i + ": " + currentItem["peculiarity"][i])
+            model.appendRow(item)
+        self.ITEM_DISCRIPTION.setWordWrap(True)
+        self.ITEM_DISCRIPTION.setText(str(currentItem["description"]))
+        self.MASS.setText(str(currentItem["weight"]))
+        self.PRICE.setText(str(currentItem["price"]))
+        pass
+
+    def loadCurrentRace(self, item):
+        currentRace = races.get(item.text())
+        self.ATTRIBUTE_UP.setText(str(currentRace["skills"]["statBufs"]))
+        self.SIZE.setText(str(currentRace["skills"]["size"]))
+        self.IDEOLOGY.setText(str(currentRace["skills"]["ideology"]))
+        self.AGE.setText(str(currentRace["skills"]["age"]))
+        model = QtGui.QStandardItemModel()
+        self.RACE_SKILLS.setModel(model)
+        self.RACE_SKILLS.setWordWrap(True)
+        for i in currentRace["skills"]["skills"]:
+            item = QtGui.QStandardItem(i)
+            model.appendRow(item)
+        pass
+        self.SPEED.setText(str(currentRace["skills"]["speed"]))
+        self.RACE_DISCRIPTION.setWordWrap(True)
+        self.RACE_DISCRIPTION.setText(str(currentRace["description"]))
+
+    def loadCurrentSpell(self, item):
+        currentSpell = spell.get(item.text())
+        self.CAST_TIME.setText(str(currentSpell["cast time"]))
+        self.CAST_COMPONENTS.setText(str(currentSpell["components"]))
+        self.CAST_DISTANSE.setText(str(currentSpell["distance"]))
+        self.SPELL_DURATION.setText(str(currentSpell["duration"]))
+        self.SPELL_NAME.setText(item.text())
+        self.SPELL_DISCRIPTION.setWordWrap(True)
+        self.SPELL_DISCRIPTION.setText(str(currentSpell["description"]))
+        pass
+
+    def loadCurrentClass(self, item):
+        currentClass = classes.get(item.text())
+        print(currentClass)
+        self.HITDICE.setText(str(currentClass["skills"]["hp dice"]))
+        self.HP_ON_FIRST_LVL.setText(str(currentClass["skills"]["base hp"]))
+        self.HP_UPGRADE.setText(str(currentClass["skills"]["hp add"]))
+        self.ARMOR.setText(str(currentClass["having skills"]["armor"]))
+        self.WEAPON.setText(str(currentClass["having skills"]["weapon"]))
+        self.TOOLS.setText(str(currentClass["having skills"]["tools"]))
+        self.SAVING_THROWS.setText(str(currentClass["having skills"]["saving throws"]))
+        model = QtGui.QStandardItemModel()
+        self.INVENTORY_LIST.setModel(model)
+        self.INVENTORY_LIST.setWordWrap(True)
+        for i in currentClass["having skills"]["equipment"]:
+            item = QtGui.QStandardItem(i)
+            model.appendRow(item)
+        self.ALTERNATIVE.setText(str(currentClass["having skills"]["alternative"]))
+        self.CLASS_DISCRIPTION.setWordWrap(True)
+        self.CLASS_DISCRIPTION.setText(str(currentClass["description"]))
+        model = QtGui.QStandardItemModel()
+        self.SPELL_LIST.setModel(model)
+        self.SPELL_LIST.setWordWrap(True)
+        for i in currentClass["spells"]:
+            item = QtGui.QStandardItem(i)
+            model.appendRow(item)
+        pass
+
+    def loadCurrentBackground(self, item):
+        currentSpell = spell.get(item.text())
+        print(currentSpell)
+        pass
