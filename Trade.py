@@ -79,16 +79,20 @@ class TradeForm(object):
     def AddButtonPushed(self):
         if self.currentRight:
             if self.uniqu:
-                self.RightList.remove(self.currentRight)
+                if self.currentRight in self.LeftList:
+                    return 0
             self.LeftList.append(self.currentRight)
             self.LeftList.sort()
+        self.CharacterList.clear()
+        self.CharacterList.addItems(self.LeftList)
+
 
     def DeleteButtonPushed(self):
         if self.currentLeft:
             self.LeftList.remove(self.currentLeft)
-            if self.uniqu:
-                self.RightList.append(self.currentLeft)
             self.RightList.sort()
+        self.CharacterList.clear()
+        self.CharacterList.addItems(self.LeftList)
 
     def ConfirmButtonPushed(self):
         QtCore.QCoreApplication.instance().quit()

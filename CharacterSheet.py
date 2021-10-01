@@ -13,6 +13,7 @@ from PyQt5.QtWidgets import QFileDialog, QDialog
 import character
 import utilities
 import Trade
+import items
 
 
 class CharacterSheetForm(object):
@@ -721,6 +722,29 @@ class CharacterSheetForm(object):
 
         self.EDIT_APPEARANCE.clicked.connect(self.loadCharImage)
         self.EDIT_SYMBOL.clicked.connect(self.loadCharSymbol)
+        self.EDIT_EQUIPMENT.clicked.connect(self.openTradeEquipment)
+        self.EDIT_TREASURE.clicked.connect(self.openTradeTreasure)
+
+
+
+    def openTradeEquipment(self):
+        trade = QDialog()
+        trade.setWindowTitle("Коллекции.")
+
+        tradeUi = Trade.TradeForm()
+        tradeUi.setupUi(trade, self.character["attributes"]["equipment"], items.getNames(), True)
+
+        trade.exec()
+
+    def openTradeTreasure(self):
+        trade = QDialog()
+        trade.setWindowTitle("Коллекции.")
+
+        tradeUi = Trade.TradeForm()
+        tradeUi.setupUi(trade, [], [], False)
+
+        trade.exec()
+
 
     def mainAttributesChanged(self):
         if(self.loaded):
