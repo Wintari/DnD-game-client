@@ -25,7 +25,7 @@ class CharacterSheetForm(object):
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(771, 1043)
+        Form.setFixedSize(771, 1043)
         self.tabWidget = QtWidgets.QTabWidget(Form)
         self.tabWidget.setGeometry(QtCore.QRect(0, 0, 871, 1171))
         self.tabWidget.setObjectName("tabWidget")
@@ -103,11 +103,11 @@ class CharacterSheetForm(object):
         self.CHA_MOD.setAlignment(QtCore.Qt.AlignCenter)
         self.CHA_MOD.setReadOnly(True)
         self.CHA_MOD.setObjectName("CHA_MOD")
-        self.listView = QtWidgets.QListView(self.tab)
-        self.listView.setGeometry(QtCore.QRect(230, 820, 491, 131))
-        self.listView.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.listView.setLineWidth(0)
-        self.listView.setObjectName("listView")
+        self.EQUIPMENT = QtWidgets.QListView(self.tab)
+        self.EQUIPMENT.setGeometry(QtCore.QRect(230, 820, 491, 131))
+        self.EQUIPMENT.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.EQUIPMENT.setLineWidth(0)
+        self.EQUIPMENT.setObjectName("listView")
         self.EDIT_EQUIPMENT = QtWidgets.QPushButton(self.tab)
         self.EDIT_EQUIPMENT.setGeometry(QtCore.QRect(430, 950, 91, 23))
         self.EDIT_EQUIPMENT.setObjectName("EDIT_EQUIPMENT")
@@ -727,19 +727,28 @@ class CharacterSheetForm(object):
 
     def openTradeEquipment(self):
         trade = QDialog()
-        trade.setWindowTitle("Коллекции.")
-        self.equipments = self.character["attributes"]["equipment"]
+        trade.setWindowTitle("Снаряжение.")
+
         tradeUi = Trade.TradeForm()
-        tradeUi.setupUi(trade, self.equipments, items.getNames(), True)
+        tradeUi.setupUi(trade, self.character["attributes"]["equipment"], items.getNames(), True)
+
+        tradeUi.ConfirmButton.clicked.connect(trade.accept)
+        tradeUi.selected.connect(self.equipmentChanged)
+
         trade.exec()
 
     def openTradeTreasure(self):
         trade = QDialog()
-        trade.setWindowTitle("Коллекции.")
-        self.treasure = self.character["description"]["treasures"]
+        trade.setWindowTitle("Инвентарь.")
+
         tradeUi = Trade.TradeForm()
-        tradeUi.setupUi(trade, self.treasure, items.getNames(), False)
+        tradeUi.setupUi(trade, self.character["description"]["treasures"], items.getNames(), False)
+
+        tradeUi.ConfirmButton.clicked.connect(trade.accept)
+        tradeUi.selected.connect(self.inventoryChanged)
+
         trade.exec()
+
 
     def mainAttributesChanged(self):
         if(self.loaded):
@@ -804,6 +813,31 @@ class CharacterSheetForm(object):
             self.character["description"]["allies"] = self.ALLIES.toPlainText()
             self.character["description"]["features"] = self.ADDITIONAL_TRAITS.toPlainText()
 
+    def inventoryChanged(self, left: list):
+        if(self.loaded):
+            self.character["description"]["treasures"] = left
+            self.updateInventory()
+
+    def equipmentChanged(self, left: list):
+        if(self.loaded):
+            self.character["attributes"]["equipment"] = left
+            self.updateEquipment()
+
+    def updateEquipment(self):
+        model = QtGui.QStandardItemModel()
+        self.EQUIPMENT.setModel(model)
+        self.EQUIPMENT.setWordWrap(True)
+        for i in self.character["attributes"]["equipment"]:
+            item = QtGui.QStandardItem(i)
+            model.appendRow(item)
+
+    def updateInventory(self):
+        model = QtGui.QStandardItemModel()
+        self.TREASURE.setModel(model)
+        self.TREASURE.setWordWrap(True)
+        for i in self.character["description"]["treasures"]:
+            item = QtGui.QStandardItem(i)
+            model.appendRow(item)
 
     def updateValues(self):
         self.updateAttributes()
@@ -823,6 +857,8 @@ class CharacterSheetForm(object):
         self.BACKSTORY.setText(self.character["description"]["backstory"])
         self.ALLIES.setText(self.character["description"]["allies"])
         self.ADDITIONAL_TRAITS.setText(self.character["description"]["features"])
+
+        self.updateInventory()
 
     def updateAttributes(self):
         self.PLAYER_NAME.setText(self.character["attributes"]["player name"])
@@ -864,6 +900,8 @@ class CharacterSheetForm(object):
         self.BONDS.setText(self.character["attributes"]["bonds"])
         self.FLAWS.setText(self.character["attributes"]["flaws"])
         self.FEATURES_AND_TRAITS.setText(self.character["attributes"]["features"])
+
+        self.updateEquipment()
 
     def updateStatsMod(self):
         strMod = utilities.calculateModifier(self.character["attributes"]["stats"]["str"])
