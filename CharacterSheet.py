@@ -786,10 +786,10 @@ class CharacterSheetForm(object):
         self.updateValues()
 
     def loadCharacter(self, path):
-        pass
+        self.character = character.load(path)
     
     def saveCharacter(self, path):
-        pass
+        character.save(path, self.character)
 
     def createCharacter(self):
         self.character = character.getDefault()
