@@ -13,6 +13,7 @@ from PyQt5.QtWidgets import QFileDialog, QDialog
 import character
 import utilities
 import Trade
+import items
 
 
 class CharacterSheetForm(object):
@@ -24,7 +25,7 @@ class CharacterSheetForm(object):
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(771, 1043)
+        Form.setFixedSize(771, 1043)
         self.tabWidget = QtWidgets.QTabWidget(Form)
         self.tabWidget.setGeometry(QtCore.QRect(0, 0, 871, 1171))
         self.tabWidget.setObjectName("tabWidget")
@@ -102,11 +103,11 @@ class CharacterSheetForm(object):
         self.CHA_MOD.setAlignment(QtCore.Qt.AlignCenter)
         self.CHA_MOD.setReadOnly(True)
         self.CHA_MOD.setObjectName("CHA_MOD")
-        self.listView = QtWidgets.QListView(self.tab)
-        self.listView.setGeometry(QtCore.QRect(230, 820, 491, 131))
-        self.listView.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.listView.setLineWidth(0)
-        self.listView.setObjectName("listView")
+        self.EQUIPMENT = QtWidgets.QListView(self.tab)
+        self.EQUIPMENT.setGeometry(QtCore.QRect(230, 820, 491, 131))
+        self.EQUIPMENT.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.EQUIPMENT.setLineWidth(0)
+        self.EQUIPMENT.setObjectName("listView")
         self.EDIT_EQUIPMENT = QtWidgets.QPushButton(self.tab)
         self.EDIT_EQUIPMENT.setGeometry(QtCore.QRect(430, 950, 91, 23))
         self.EDIT_EQUIPMENT.setObjectName("EDIT_EQUIPMENT")
@@ -620,195 +621,6 @@ class CharacterSheetForm(object):
         self.SKIN.raise_()
         self.HAIR.raise_()
         self.tabWidget.addTab(self.tab_2, "")
-        self.tab_3 = QtWidgets.QWidget()
-        self.tab_3.setObjectName("tab_3")
-        self.label_3 = QtWidgets.QLabel(self.tab_3)
-        self.label_3.setGeometry(QtCore.QRect(0, 0, 771, 1021))
-        self.label_3.setText("")
-        self.label_3.setPixmap(QtGui.QPixmap("./data/images/CharacterSheet3.JPG"))
-        self.label_3.setObjectName("label_3")
-        self.CONTRIPS = QtWidgets.QListView(self.tab_3)
-        self.CONTRIPS.setGeometry(QtCore.QRect(25, 220, 225, 123))
-        self.CONTRIPS.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.CONTRIPS.setObjectName("CONTRIPS")
-        self.SPELLS_1 = QtWidgets.QListView(self.tab_3)
-        self.SPELLS_1.setGeometry(QtCore.QRect(25, 444, 225, 217))
-        self.SPELLS_1.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.SPELLS_1.setObjectName("SPELLS_1")
-        self.SPELLS_2 = QtWidgets.QListView(self.tab_3)
-        self.SPELLS_2.setGeometry(QtCore.QRect(25, 750, 225, 221))
-        self.SPELLS_2.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.SPELLS_2.setObjectName("SPELLS_2")
-        self.SPELLS_3 = QtWidgets.QListView(self.tab_3)
-        self.SPELLS_3.setGeometry(QtCore.QRect(270, 220, 225, 215))
-        self.SPELLS_3.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.SPELLS_3.setObjectName("SPELLS_3")
-        self.SPELLS_4 = QtWidgets.QListView(self.tab_3)
-        self.SPELLS_4.setGeometry(QtCore.QRect(270, 520, 225, 215))
-        self.SPELLS_4.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.SPELLS_4.setObjectName("SPELLS_4")
-        self.SPELLS_5 = QtWidgets.QListView(self.tab_3)
-        self.SPELLS_5.setGeometry(QtCore.QRect(270, 823, 225, 148))
-        self.SPELLS_5.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.SPELLS_5.setObjectName("SPELLS_5")
-        self.SPELLS_6 = QtWidgets.QListView(self.tab_3)
-        self.SPELLS_6.setGeometry(QtCore.QRect(512, 220, 231, 141))
-        self.SPELLS_6.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.SPELLS_6.setObjectName("SPELLS_6")
-        self.SPELLS_7 = QtWidgets.QListView(self.tab_3)
-        self.SPELLS_7.setGeometry(QtCore.QRect(513, 450, 231, 137))
-        self.SPELLS_7.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.SPELLS_7.setObjectName("SPELLS_7")
-        self.SPELLS_8 = QtWidgets.QListView(self.tab_3)
-        self.SPELLS_8.setGeometry(QtCore.QRect(513, 675, 231, 101))
-        self.SPELLS_8.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.SPELLS_8.setObjectName("SPELLS_8")
-        self.SPELLS_9 = QtWidgets.QListView(self.tab_3)
-        self.SPELLS_9.setGeometry(QtCore.QRect(513, 861, 231, 109))
-        self.SPELLS_9.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.SPELLS_9.setObjectName("SPELLS_9")
-        self.ADD_CONTRIPS = QtWidgets.QPushButton(self.tab_3)
-        self.ADD_CONTRIPS.setGeometry(QtCore.QRect(103, 345, 75, 23))
-        self.ADD_CONTRIPS.setObjectName("ADD_CONTRIPS")
-        self.ADD_SPELL_1 = QtWidgets.QPushButton(self.tab_3)
-        self.ADD_SPELL_1.setGeometry(QtCore.QRect(90, 663, 101, 23))
-        self.ADD_SPELL_1.setObjectName("ADD_SPELL_1")
-        self.ADD_SPELL_2 = QtWidgets.QPushButton(self.tab_3)
-        self.ADD_SPELL_2.setGeometry(QtCore.QRect(90, 973, 101, 23))
-        self.ADD_SPELL_2.setObjectName("ADD_SPELL_2")
-        self.ADD_SPELL_3 = QtWidgets.QPushButton(self.tab_3)
-        self.ADD_SPELL_3.setGeometry(QtCore.QRect(333, 437, 101, 23))
-        self.ADD_SPELL_3.setObjectName("ADD_SPELL_3")
-        self.ADD_SPELL_4 = QtWidgets.QPushButton(self.tab_3)
-        self.ADD_SPELL_4.setGeometry(QtCore.QRect(333, 737, 111, 23))
-        self.ADD_SPELL_4.setObjectName("ADD_SPELL_4")
-        self.ADD_SPELL_5 = QtWidgets.QPushButton(self.tab_3)
-        self.ADD_SPELL_5.setGeometry(QtCore.QRect(333, 973, 111, 23))
-        self.ADD_SPELL_5.setObjectName("ADD_SPELL_5")
-        self.ADD_SPELL_6 = QtWidgets.QPushButton(self.tab_3)
-        self.ADD_SPELL_6.setGeometry(QtCore.QRect(578, 363, 101, 23))
-        self.ADD_SPELL_6.setObjectName("ADD_SPELL_6")
-        self.ADD_SPELL_7 = QtWidgets.QPushButton(self.tab_3)
-        self.ADD_SPELL_7.setGeometry(QtCore.QRect(578, 589, 101, 23))
-        self.ADD_SPELL_7.setObjectName("ADD_SPELL_7")
-        self.ADD_SPELL_8 = QtWidgets.QPushButton(self.tab_3)
-        self.ADD_SPELL_8.setGeometry(QtCore.QRect(578, 778, 111, 23))
-        self.ADD_SPELL_8.setObjectName("ADD_SPELL_8")
-        self.ADD_SPELL_9 = QtWidgets.QPushButton(self.tab_3)
-        self.ADD_SPELL_9.setGeometry(QtCore.QRect(578, 973, 101, 23))
-        self.ADD_SPELL_9.setObjectName("ADD_SPELL_9")
-        self.SPELLCASTING_CLASS = QtWidgets.QLineEdit(self.tab_3)
-        self.SPELLCASTING_CLASS.setReadOnly(True)
-        self.SPELLCASTING_CLASS.setGeometry(QtCore.QRect(70, 80, 241, 20))
-        self.SPELLCASTING_CLASS.setFrame(False)
-        self.SPELLCASTING_CLASS.setObjectName("SPELLCASTING_CLASS")
-        self.SPELLCASTING_ABILITY = QtWidgets.QLineEdit(self.tab_3)
-        self.SPELLCASTING_ABILITY.setReadOnly(True)
-        self.SPELLCASTING_ABILITY.setGeometry(QtCore.QRect(360, 70, 71, 20))
-        self.SPELLCASTING_ABILITY.setFrame(False)
-        self.SPELLCASTING_ABILITY.setObjectName("SPELLCASTING_ABILITY")
-        self.SPELLCASTING_SAVE_DC = QtWidgets.QLineEdit(self.tab_3)
-        self.SPELLCASTING_SAVE_DC.setReadOnly(True)
-        self.SPELLCASTING_SAVE_DC.setGeometry(QtCore.QRect(491, 70, 71, 20))
-        self.SPELLCASTING_SAVE_DC.setFrame(False)
-        self.SPELLCASTING_SAVE_DC.setObjectName("SPELLCASTING_SAVE_DC")
-        self.SPELL_ATTACK_BONUS = QtWidgets.QLineEdit(self.tab_3)
-        self.SPELL_ATTACK_BONUS.setReadOnly(True)
-        self.SPELL_ATTACK_BONUS.setGeometry(QtCore.QRect(626, 70, 71, 20))
-        self.SPELL_ATTACK_BONUS.setFrame(False)
-        self.SPELL_ATTACK_BONUS.setObjectName("SPELL_ATTACK_BONUS")
-        self.SPELL_SLOT_1_TOTAL = QtWidgets.QLineEdit(self.tab_3)
-        self.SPELL_SLOT_1_TOTAL.setGeometry(QtCore.QRect(60, 410, 41, 20))
-        self.SPELL_SLOT_1_TOTAL.setFrame(False)
-        self.SPELL_SLOT_1_TOTAL.setObjectName("SPELL_SLOT_1_TOTAL")
-        self.SPELL_SLOT_2_TOTAL = QtWidgets.QLineEdit(self.tab_3)
-        self.SPELL_SLOT_2_TOTAL.setGeometry(QtCore.QRect(53, 714, 51, 20))
-        self.SPELL_SLOT_2_TOTAL.setFrame(False)
-        self.SPELL_SLOT_2_TOTAL.setObjectName("SPELL_SLOT_2_TOTAL")
-        self.SPELL_SLOT_1_EXPENDED = QtWidgets.QLineEdit(self.tab_3)
-        self.SPELL_SLOT_1_EXPENDED.setGeometry(QtCore.QRect(126, 410, 111, 20))
-        self.SPELL_SLOT_1_EXPENDED.setFrame(False)
-        self.SPELL_SLOT_1_EXPENDED.setObjectName("SPELL_SLOT_1_EXPENDED")
-        self.SPELL_SLOT_2_EXPENDED = QtWidgets.QLineEdit(self.tab_3)
-        self.SPELL_SLOT_2_EXPENDED.setGeometry(QtCore.QRect(126, 714, 111, 20))
-        self.SPELL_SLOT_2_EXPENDED.setFrame(False)
-        self.SPELL_SLOT_2_EXPENDED.setObjectName("SPELL_SLOT_2_EXPENDED")
-        self.SPELL_SLOT_3_TOTAL = QtWidgets.QLineEdit(self.tab_3)
-        self.SPELL_SLOT_3_TOTAL.setGeometry(QtCore.QRect(302, 186, 41, 20))
-        self.SPELL_SLOT_3_TOTAL.setFrame(False)
-        self.SPELL_SLOT_3_TOTAL.setObjectName("SPELL_SLOT_3_TOTAL")
-        self.SPELL_SLOT_4_TOTAL = QtWidgets.QLineEdit(self.tab_3)
-        self.SPELL_SLOT_4_TOTAL.setGeometry(QtCore.QRect(302, 486, 41, 20))
-        self.SPELL_SLOT_4_TOTAL.setFrame(False)
-        self.SPELL_SLOT_4_TOTAL.setObjectName("SPELL_SLOT_4_TOTAL")
-        self.SPELL_SLOT_5_TOTAL = QtWidgets.QLineEdit(self.tab_3)
-        self.SPELL_SLOT_5_TOTAL.setGeometry(QtCore.QRect(303, 788, 41, 20))
-        self.SPELL_SLOT_5_TOTAL.setFrame(False)
-        self.SPELL_SLOT_5_TOTAL.setObjectName("SPELL_SLOT_5_TOTAL")
-        self.SPELL_SLOT_6_TOTAL = QtWidgets.QLineEdit(self.tab_3)
-        self.SPELL_SLOT_6_TOTAL.setGeometry(QtCore.QRect(546, 187, 41, 20))
-        self.SPELL_SLOT_6_TOTAL.setFrame(False)
-        self.SPELL_SLOT_6_TOTAL.setObjectName("SPELL_SLOT_6_TOTAL")
-        self.SPELL_SLOT_7_TOTAL = QtWidgets.QLineEdit(self.tab_3)
-        self.SPELL_SLOT_7_TOTAL.setGeometry(QtCore.QRect(546, 413, 41, 20))
-        self.SPELL_SLOT_7_TOTAL.setFrame(False)
-        self.SPELL_SLOT_7_TOTAL.setObjectName("SPELL_SLOT_7_TOTAL")
-        self.SPELLCASTING_ABILITY_11 = QtWidgets.QLineEdit(self.tab_3)
-        self.SPELLCASTING_ABILITY_11.setGeometry(QtCore.QRect(620, 410, 101, 20))
-        self.SPELLCASTING_ABILITY_11.setFrame(False)
-        self.SPELLCASTING_ABILITY_11.setObjectName("SPELLCASTING_ABILITY_11")
-        self.SPELL_SLOT_8_TOTAL = QtWidgets.QLineEdit(self.tab_3)
-        self.SPELL_SLOT_8_TOTAL.setGeometry(QtCore.QRect(545, 640, 41, 20))
-        self.SPELL_SLOT_8_TOTAL.setFrame(False)
-        self.SPELL_SLOT_8_TOTAL.setObjectName("SPELL_SLOT_8_TOTAL")
-        self.SPELLCASTING_ABILITY_13 = QtWidgets.QLineEdit(self.tab_3)
-        self.SPELLCASTING_ABILITY_13.setGeometry(QtCore.QRect(610, 640, 111, 20))
-        self.SPELLCASTING_ABILITY_13.setFrame(False)
-        self.SPELLCASTING_ABILITY_13.setObjectName("SPELLCASTING_ABILITY_13")
-        self.SPELL_SLOT_9_TOTAL = QtWidgets.QLineEdit(self.tab_3)
-        self.SPELL_SLOT_9_TOTAL.setGeometry(QtCore.QRect(544, 825, 41, 20))
-        self.SPELL_SLOT_9_TOTAL.setFrame(False)
-        self.SPELL_SLOT_9_TOTAL.setObjectName("SPELL_SLOT_9_TOTAL")
-        self.SPELL_SLOT_3_EXPENDED = QtWidgets.QLineEdit(self.tab_3)
-        self.SPELL_SLOT_3_EXPENDED.setGeometry(QtCore.QRect(370, 186, 111, 20))
-        self.SPELL_SLOT_3_EXPENDED.setFrame(False)
-        self.SPELL_SLOT_3_EXPENDED.setObjectName("SPELL_SLOT_3_EXPENDED")
-        self.SPELL_SLOT_4_EXPENDED = QtWidgets.QLineEdit(self.tab_3)
-        self.SPELL_SLOT_4_EXPENDED.setGeometry(QtCore.QRect(370, 486, 111, 20))
-        self.SPELL_SLOT_4_EXPENDED.setFrame(False)
-        self.SPELL_SLOT_4_EXPENDED.setObjectName("SPELL_SLOT_4_EXPENDED")
-        self.SPELL_SLOT_5_EXPENDED = QtWidgets.QLineEdit(self.tab_3)
-        self.SPELL_SLOT_5_EXPENDED.setGeometry(QtCore.QRect(370, 788, 111, 20))
-        self.SPELL_SLOT_5_EXPENDED.setFrame(False)
-        self.SPELL_SLOT_5_EXPENDED.setObjectName("SPELL_SLOT_5_EXPENDED")
-        self.SPELL_SLOT_6_EXPENDED = QtWidgets.QLineEdit(self.tab_3)
-        self.SPELL_SLOT_6_EXPENDED.setGeometry(QtCore.QRect(612, 186, 111, 20))
-        self.SPELL_SLOT_6_EXPENDED.setFrame(False)
-        self.SPELL_SLOT_6_EXPENDED.setObjectName("SPELL_SLOT_6_EXPENDED")
-        self.SPELL_SLOT_7_EXPENDED = QtWidgets.QLineEdit(self.tab_3)
-        self.SPELL_SLOT_7_EXPENDED.setGeometry(QtCore.QRect(610, 413, 111, 20))
-        self.SPELL_SLOT_7_EXPENDED.setFrame(False)
-        self.SPELL_SLOT_7_EXPENDED.setObjectName("SPELL_SLOT_7_EXPENDED")
-        self.SPELL_SLOT_8_EXPENDED = QtWidgets.QLineEdit(self.tab_3)
-        self.SPELL_SLOT_8_EXPENDED.setGeometry(QtCore.QRect(610, 640, 111, 20))
-        self.SPELL_SLOT_8_EXPENDED.setFrame(False)
-        self.SPELL_SLOT_8_EXPENDED.setObjectName("SPELL_SLOT_8_EXPENDED")
-        self.SPELL_SLOT_9_EXPENDED = QtWidgets.QLineEdit(self.tab_3)
-        self.SPELL_SLOT_9_EXPENDED.setGeometry(QtCore.QRect(610, 826, 111, 20))
-        self.SPELL_SLOT_9_EXPENDED.setFrame(False)
-        self.SPELL_SLOT_9_EXPENDED.setObjectName("SPELL_SLOT_9_EXPENDED")
-        self.tabWidget.addTab(self.tab_3, "")
-
-        self.ADD_CONTRIPS.clicked.connect(self.openTrade)
-        self.ADD_SPELL_1.clicked.connect(self.openTrade)
-        self.ADD_SPELL_2.clicked.connect(self.openTrade)
-        self.ADD_SPELL_3.clicked.connect(self.openTrade)
-        self.ADD_SPELL_4.clicked.connect(self.openTrade)
-        self.ADD_SPELL_5.clicked.connect(self.openTrade)
-        self.ADD_SPELL_6.clicked.connect(self.openTrade)
-        self.ADD_SPELL_7.clicked.connect(self.openTrade)
-        self.ADD_SPELL_8.clicked.connect(self.openTrade)
-        self.ADD_SPELL_9.clicked.connect(self.openTrade)
 
         self.retranslateUi(Form)
         self.tabWidget.setCurrentIndex(0)
@@ -910,6 +722,53 @@ class CharacterSheetForm(object):
 
         self.EDIT_APPEARANCE.clicked.connect(self.loadCharImage)
         self.EDIT_SYMBOL.clicked.connect(self.loadCharSymbol)
+        self.EDIT_EQUIPMENT.clicked.connect(self.openTradeEquipment)
+        self.EDIT_TREASURE.clicked.connect(self.openTradeTreasure)
+
+    def openTradeEquipment(self):
+        trade = QDialog()
+        trade.setWindowTitle("Снаряжение.")
+
+        tradeUi = Trade.TradeForm()
+        tradeUi.setupUi(trade, self.character["attributes"]["equipment"], items.getNames(), True)
+
+        tradeUi.ConfirmButton.clicked.connect(trade.accept)
+        tradeUi.selected.connect(self.equipmentChanged)
+
+        trade.exec()
+
+    def openTradeTreasure(self):
+        trade = QDialog()
+        trade.setWindowTitle("Инвентарь.")
+
+        tradeUi = Trade.TradeForm()
+        tradeUi.setupUi(trade, self.character["description"]["treasures"], items.getNames(), False)
+
+        tradeUi.ConfirmButton.clicked.connect(trade.accept)
+        tradeUi.selected.connect(self.inventoryChanged)
+
+        trade.exec()
+
+    def findAttack(self):
+        res = []
+        equipments = self.character["attributes"]["equipment"]
+        for name in equipments:
+            item = items.get(name)
+            if item["type"] == "Оружие":
+                resstr = str(name) + ": " + str(item["peculiarity"]["Урон"])
+                if int(self.STR_MOD.text()) > 0:
+                    resstr += " + " + self.STR_MOD.text()
+                res.append(resstr)
+        return res
+
+    def updateAttacks(self):
+        attacks = self.findAttack()
+        model = QtGui.QStandardItemModel()
+        self.ATTACKS.setModel(model)
+        self.ATTACKS.setWordWrap(True)
+        for i in attacks:
+            item = QtGui.QStandardItem(i)
+            model.appendRow(item)
 
     def mainAttributesChanged(self):
         if(self.loaded):
@@ -960,7 +819,6 @@ class CharacterSheetForm(object):
             self.character["attributes"]["features"] = self.FEATURES_AND_TRAITS.toPlainText()
 
             self.CHARACTER_NAME_AND_TITLES_2.setText(self.character["attributes"]["character name"])
-            self.SPELLCASTING_CLASS.setText(self.character["attributes"]["class"])
     
     def secondSheetAnyTextChanged(self):
         if(self.loaded):
@@ -975,11 +833,37 @@ class CharacterSheetForm(object):
             self.character["description"]["allies"] = self.ALLIES.toPlainText()
             self.character["description"]["features"] = self.ADDITIONAL_TRAITS.toPlainText()
 
+    def inventoryChanged(self, left: list):
+        if(self.loaded):
+            self.character["description"]["treasures"] = left
+            self.updateInventory()
+
+    def equipmentChanged(self, left: list):
+        if(self.loaded):
+            self.character["attributes"]["equipment"] = left
+            self.updateEquipment()
+
+    def updateEquipment(self):
+        model = QtGui.QStandardItemModel()
+        self.EQUIPMENT.setModel(model)
+        self.EQUIPMENT.setWordWrap(True)
+        for i in self.character["attributes"]["equipment"]:
+            item = QtGui.QStandardItem(i)
+            model.appendRow(item)
+        self.updateAttacks()
+
+    def updateInventory(self):
+        model = QtGui.QStandardItemModel()
+        self.TREASURE.setModel(model)
+        self.TREASURE.setWordWrap(True)
+        for i in self.character["description"]["treasures"]:
+            item = QtGui.QStandardItem(i)
+            model.appendRow(item)
 
     def updateValues(self):
         self.updateAttributes()
         self.updateDescription()
-        self.updateSpells()
+
 
     def updateDescription(self):
         self.CHARACTER_NAME_AND_TITLES_2.setText(self.character["attributes"]["character name"])
@@ -996,9 +880,7 @@ class CharacterSheetForm(object):
         self.ALLIES.setText(self.character["description"]["allies"])
         self.ADDITIONAL_TRAITS.setText(self.character["description"]["features"])
 
-    def updateSpells(self):
-        self.SPELLCASTING_CLASS.setText(self.character["attributes"]["class"])
-        self.SPELLCASTING_ABILITY.setText("WIS")
+        self.updateInventory()
 
     def updateAttributes(self):
         self.PLAYER_NAME.setText(self.character["attributes"]["player name"])
@@ -1017,6 +899,8 @@ class CharacterSheetForm(object):
         self.INT_VALUE.setValue(self.character["attributes"]["stats"]["int"])
         self.WIS_VALUE.setValue(self.character["attributes"]["stats"]["wis"])
         self.CHA_VALUE.setValue(self.character["attributes"]["stats"]["cha"])
+
+        self.TOTAL_HIT_DICE.setText(str(self.character["attributes"]["lvl"]))
 
         self.updateStatsMod()
 
@@ -1041,6 +925,8 @@ class CharacterSheetForm(object):
         self.FLAWS.setText(self.character["attributes"]["flaws"])
         self.FEATURES_AND_TRAITS.setText(self.character["attributes"]["features"])
 
+        self.updateEquipment()
+
     def updateStatsMod(self):
         strMod = utilities.calculateModifier(self.character["attributes"]["stats"]["str"])
         dexMod = utilities.calculateModifier(self.character["attributes"]["stats"]["dex"])
@@ -1061,6 +947,7 @@ class CharacterSheetForm(object):
         self.updateSaveMod()
         self.updateSkillsMod()
         self.updateDeathSaves()
+        self.updateAttacks()
 
 
     def saveModsUpdated(self):
@@ -1073,6 +960,7 @@ class CharacterSheetForm(object):
             self.character["attributes"]["saving throws"]["cha"] = self.CHA_ST_CHECK.isChecked()
 
             self.updateSaveMod()
+            self.updateAttacks()
 
     def updateSaveMod(self):
         strMod = utilities.calculateModifier(self.character["attributes"]["stats"]["str"])
@@ -1083,9 +971,6 @@ class CharacterSheetForm(object):
         chaMod = utilities.calculateModifier(self.character["attributes"]["stats"]["cha"])
 
         proBonus = utilities.calculateProficiencyBonus(self.character["attributes"]["lvl"])
-
-        self.SPELLCASTING_SAVE_DC.setText(str(8 + wisMod + proBonus))
-        self.SPELL_ATTACK_BONUS.setText(str(wisMod + proBonus))
 
         if(self.character["attributes"]["saving throws"]["str"]):
             self.STR_ST_CHECK.setChecked(True)
@@ -1336,24 +1221,15 @@ class CharacterSheetForm(object):
         self.EDIT_APPEARANCE.setText(_translate("Form", "Внешность"))
         self.EDIT_SYMBOL.setText(_translate("Form", "Герб"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("Form", "Описание персонажа"))
-        self.ADD_CONTRIPS.setText(_translate("Form", "Заговоры"))
-        self.ADD_SPELL_1.setText(_translate("Form", "Заклинания 1ур"))
-        self.ADD_SPELL_2.setText(_translate("Form", "Заклинания 2ур"))
-        self.ADD_SPELL_3.setText(_translate("Form", "Заклинания 3ур"))
-        self.ADD_SPELL_4.setText(_translate("Form", "Заклинания 4ур"))
-        self.ADD_SPELL_5.setText(_translate("Form", "Заклинания 5ур"))
-        self.ADD_SPELL_6.setText(_translate("Form", "Заклинания 6ур"))
-        self.ADD_SPELL_7.setText(_translate("Form", "Заклинания 7ур"))
-        self.ADD_SPELL_8.setText(_translate("Form", "Заклинания 8ур"))
-        self.ADD_SPELL_9.setText(_translate("Form", "Заклинания 9ур"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("Form", "Заклинания и умения"))
 
-    def openTrade(self):
+    def changeEquipment(self):
         trade = QDialog()
         trade.setWindowTitle("Коллекции.")
 
         tradeUi = Trade.TradeForm()
         tradeUi.setupUi(trade)
+
+        tradeUi.ConfirmButton.clicked.connect(trade.accept)
 
         trade.exec()
 
