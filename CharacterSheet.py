@@ -900,8 +900,6 @@ class CharacterSheetForm(object):
         self.WIS_VALUE.setValue(self.character["attributes"]["stats"]["wis"])
         self.CHA_VALUE.setValue(self.character["attributes"]["stats"]["cha"])
 
-        self.TOTAL_HIT_DICE.setText(str(self.character["attributes"]["lvl"]))
-
         self.updateStatsMod()
 
         proBonus = utilities.calculateProficiencyBonus(self.character["attributes"]["lvl"])
@@ -942,6 +940,7 @@ class CharacterSheetForm(object):
         self.WIS_MOD.setText(str(wisMod))
         self.CHA_MOD.setText(str(chaMod))
         self.PASSIVE_WISDOM.setText(str(10 + wisMod))
+        self.TOTAL_HIT_DICE.setText(str(self.character["attributes"]["lvl"]))
 
 
         self.updateSaveMod()
