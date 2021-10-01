@@ -749,6 +749,26 @@ class CharacterSheetForm(object):
 
         trade.exec()
 
+    def findAttack(self):
+        res = []
+        equipments = self.character["attributes"]["equipment"]
+        for name in equipments:
+            item = items.get(name)
+            if item["type"] == "Оружие":
+                resstr = str(name) + ": " + str(item["peculiarity"]["Урон"])
+                if int(self.STR_MOD.text()) > 0:
+                    resstr += " + " + self.STR_MOD.text()
+                res.append(resstr)
+        return res
+
+    def updateAttacks(self):
+        attacks = self.findAttack()
+        model = QtGui.QStandardItemModel()
+        self.ATTACKS.setModel(model)
+        self.ATTACKS.setWordWrap(True)
+        for i in attacks:
+            item = QtGui.QStandardItem(i)
+            model.appendRow(item)
 
     def mainAttributesChanged(self):
         if(self.loaded):
@@ -830,6 +850,7 @@ class CharacterSheetForm(object):
         for i in self.character["attributes"]["equipment"]:
             item = QtGui.QStandardItem(i)
             model.appendRow(item)
+        self.updateAttacks()
 
     def updateInventory(self):
         model = QtGui.QStandardItemModel()
@@ -842,6 +863,7 @@ class CharacterSheetForm(object):
     def updateValues(self):
         self.updateAttributes()
         self.updateDescription()
+
 
     def updateDescription(self):
         self.CHARACTER_NAME_AND_TITLES_2.setText(self.character["attributes"]["character name"])
@@ -877,6 +899,8 @@ class CharacterSheetForm(object):
         self.INT_VALUE.setValue(self.character["attributes"]["stats"]["int"])
         self.WIS_VALUE.setValue(self.character["attributes"]["stats"]["wis"])
         self.CHA_VALUE.setValue(self.character["attributes"]["stats"]["cha"])
+
+        self.TOTAL_HIT_DICE.setText(str(self.character["attributes"]["lvl"]))
 
         self.updateStatsMod()
 
@@ -923,6 +947,7 @@ class CharacterSheetForm(object):
         self.updateSaveMod()
         self.updateSkillsMod()
         self.updateDeathSaves()
+        self.updateAttacks()
 
 
     def saveModsUpdated(self):
@@ -935,6 +960,7 @@ class CharacterSheetForm(object):
             self.character["attributes"]["saving throws"]["cha"] = self.CHA_ST_CHECK.isChecked()
 
             self.updateSaveMod()
+            self.updateAttacks()
 
     def updateSaveMod(self):
         strMod = utilities.calculateModifier(self.character["attributes"]["stats"]["str"])
