@@ -1,0 +1,149 @@
+{
+    "attributes":
+    {
+        "character name": "",
+        "player name": "",
+        "class": "",
+        "race": "",
+        "origin": "",
+        "alignment": "",
+        "background": "",
+        "lvl": 0,
+        "exp": "0",
+        "stats": 
+        {
+            "str": 0,
+            "dex": 0,
+            "con": 0,
+            "int": 0,
+            "wis": 0,
+            "cha": 0
+        },
+        "proficiencies": "",
+        "inspiration": "0",
+        "saving throws": 
+        {
+            "str": false,
+            "dex": false,
+            "con": false,
+            "int": false,
+            "wis": false,
+            "cha": false
+        },
+        "skills": 
+        {
+            "acrobatics": false,
+            "animal handling": false,
+            "arcana": false,
+            "athletics": false,
+            "deception": false,
+            "history": false,
+            "insight": false,
+            "intimidation": false,
+            "investigation": false,
+            "medicine": false,
+            "nature": false,
+            "perception": false,
+            "performance": false,
+            "persuasion": false,
+            "religion": false,
+            "sleight of hand": false,
+            "stealth": false,
+            "survival": false
+        },
+        "ac": "",
+        "initiative": "",
+        "speed": "",
+        "hit dice": "",
+        "max hp": "",
+        "cur hp": "",
+        "tmp hp": "",
+        "death saves": 0,
+        "atacks": [],
+        "equipment": [],
+        "personality traits": "",
+        "ideals": "",
+        "bonds": "",
+        "flaws": "",
+        "features": ""
+    },
+    "description":
+    {
+        "age": "",
+        "height": "",
+        "weight": "",
+        "eyes": "",
+        "skin": "",
+        "hair": "",
+        "image": "",
+        "backstory": "",
+        "allies": "",
+        "symbol": "",
+        "symbol name": "",
+        "features": "",
+        "treasures": []
+    },
+    "spells":
+    {
+        "cantrips": [],
+        "1": 
+        {
+            "total slots": 0,
+            "expended slots": 0,
+            "spells": []
+        },
+        "2": 
+        {
+            "total slots": 0,
+            "expended slots": 0,
+            "spells": []
+        },
+        "3": 
+        {
+            "total slots": 0,
+            "expended slots": 0,
+            "spells": []
+        },
+        "4": 
+        {
+            "total slots": 0,
+            "expended slots": 0,
+            "spells": []
+        }
+        ,
+        "5": 
+        {
+            "total slots": 0,
+            "expended slots": 0,
+            "spells": []
+        }
+        ,
+        "6": 
+        {
+            "total slots": 0,
+            "expended slots": 0,
+            "spells": []
+        }
+        ,
+        "7": 
+        {
+            "total slots": 0,
+            "expended slots": 0,
+            "spells": []
+        }
+        ,
+        "8": 
+        {
+            "total slots": 0,
+            "expended slots": 0,
+            "spells": []
+        }
+        ,
+        "9": 
+        {
+            "total slots": 0,
+            "expended slots": 0,
+            "spells": []
+        }
+    }
+}
